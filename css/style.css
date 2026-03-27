@@ -749,6 +749,140 @@ img {
     color: var(--primary);
 }
 
+/* Partitions */
+.partitions-programme {
+    margin-bottom: 32px;
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.partitions-titre {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 16px 24px;
+    background: var(--dark);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.partitions-titre i {
+    color: var(--gold);
+}
+
+.partitions-titre.supprimer {
+    background: #8B1A1A;
+}
+
+.partitions-badge {
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.partitions-list {
+    padding: 8px 0;
+}
+
+.partition-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background var(--transition);
+}
+
+.partition-item:last-child {
+    border-bottom: none;
+}
+
+.partition-item:hover {
+    background: rgba(0,0,0,0.03);
+}
+
+.partition-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.partition-status.ready {
+    background: #27ae60;
+}
+
+.partition-status.wip {
+    background: #e74c3c;
+}
+
+.partition-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.partition-links {
+    display: flex;
+    gap: 8px;
+}
+
+.partition-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all var(--transition);
+}
+
+.partition-link.pdf {
+    background: rgba(123,30,45,0.1);
+    color: var(--primary);
+}
+
+.partition-link.pdf:hover {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.partition-link.yt {
+    background: rgba(231,76,60,0.1);
+    color: #e74c3c;
+}
+
+.partition-link.yt:hover {
+    background: #e74c3c;
+    color: var(--white);
+}
+
+.partition-link.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.partitions-legend {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
 @media (max-width: 768px) {
     .members-cards {
         grid-template-columns: 1fr;
@@ -759,6 +893,13 @@ img {
     }
     .login-card {
         padding: 32px 24px;
+    }
+    .partition-item {
+        flex-wrap: wrap;
+    }
+    .partition-links {
+        width: 100%;
+        padding-left: 24px;
     }
 }
 
