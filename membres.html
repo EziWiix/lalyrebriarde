@@ -84,6 +84,16 @@
                 </div>
             </div>
 
+            <!-- Onglets formations -->
+            <div class="formations-tabs">
+                <button class="formation-tab active" data-tab="orchestre"><i class="fas fa-music"></i> Orchestre</button>
+                <button class="formation-tab" data-tab="marching"><i class="fas fa-person-walking"></i> Marching</button>
+                <button class="formation-tab" data-tab="fanfare"><i class="fas fa-landmark"></i> Fanfare</button>
+            </div>
+
+            <!-- === TAB ORCHESTRE === -->
+            <div class="formation-content active" id="tab-orchestre">
+
             <!-- Annonces -->
             <div class="members-section">
                 <h3><i class="fas fa-bullhorn"></i> Annonces</h3>
@@ -458,6 +468,104 @@
                 </div>
             </div>
 
+            </div><!-- fin tab orchestre -->
+
+            <!-- === TAB MARCHING === -->
+            <div class="formation-content" id="tab-marching">
+                <div class="members-section">
+                    <h3><i class="fas fa-file-audio"></i> Partitions Marching' Band</h3>
+                    <div class="partitions-programme">
+                        <h4 class="partitions-titre"><i class="fas fa-star"></i> R&eacute;pertoire Marching' Band</h4>
+                        <div class="partitions-list">
+                            <div class="partition-item">
+                                <span class="partition-status ready"></span>
+                                <span class="partition-name">&Agrave; compl&eacute;ter — ajoutez vos morceaux ici</span>
+                                <div class="partition-links">
+                                    <a href="#" class="partition-link pdf disabled"><i class="fas fa-file-pdf"></i> Partition</a>
+                                    <a href="#" class="partition-link yt disabled"><i class="fab fa-youtube"></i> YouTube</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="partitions-legend">
+                        <span class="partition-status ready"></span> Pr&ecirc;t &nbsp;&nbsp;
+                        <span class="partition-status wip"></span> &Agrave; travailler
+                    </p>
+                </div>
+
+                <div class="members-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Planning Marching</h3>
+                    <div class="members-table-wrapper">
+                        <table class="members-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>&Eacute;v&eacute;nement</th>
+                                    <th>Lieu</th>
+                                    <th>Heure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&Agrave; compl&eacute;ter</td>
+                                    <td>&mdash;</td>
+                                    <td>&mdash;</td>
+                                    <td>&mdash;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- fin tab marching -->
+
+            <!-- === TAB FANFARE === -->
+            <div class="formation-content" id="tab-fanfare">
+                <div class="members-section">
+                    <h3><i class="fas fa-file-audio"></i> Partitions Fanfare</h3>
+                    <div class="partitions-programme">
+                        <h4 class="partitions-titre"><i class="fas fa-star"></i> R&eacute;pertoire Fanfare</h4>
+                        <div class="partitions-list">
+                            <div class="partition-item">
+                                <span class="partition-status ready"></span>
+                                <span class="partition-name">&Agrave; compl&eacute;ter — ajoutez vos morceaux ici</span>
+                                <div class="partition-links">
+                                    <a href="#" class="partition-link pdf disabled"><i class="fas fa-file-pdf"></i> Partition</a>
+                                    <a href="#" class="partition-link yt disabled"><i class="fab fa-youtube"></i> YouTube</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="partitions-legend">
+                        <span class="partition-status ready"></span> Pr&ecirc;t &nbsp;&nbsp;
+                        <span class="partition-status wip"></span> &Agrave; travailler
+                    </p>
+                </div>
+
+                <div class="members-section">
+                    <h3><i class="fas fa-calendar-alt"></i> Planning Fanfare</h3>
+                    <div class="members-table-wrapper">
+                        <table class="members-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>&Eacute;v&eacute;nement</th>
+                                    <th>Lieu</th>
+                                    <th>Heure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>08/05/2026</td>
+                                    <td>Comm&eacute;moration 8 mai</td>
+                                    <td>Monument aux morts</td>
+                                    <td>10h30</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- fin tab fanfare -->
+
             <!-- Déconnexion -->
             <div style="text-align: center; margin-top: 40px;">
                 <button class="btn btn-outline" id="logoutBtn">
@@ -551,6 +659,18 @@
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
             }
+        });
+
+        // Formation tabs
+        document.querySelectorAll('.formation-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active from all tabs and contents
+                document.querySelectorAll('.formation-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.formation-content').forEach(c => c.classList.remove('active'));
+                // Activate clicked tab and its content
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            });
         });
 
         logoutBtn.addEventListener('click', () => {

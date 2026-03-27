@@ -749,6 +749,49 @@ img {
     color: var(--primary);
 }
 
+/* Formation Tabs */
+.formations-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.formation-tab {
+    padding: 14px 28px;
+    border: 2px solid var(--gray-300);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--gray-700);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--transition);
+}
+
+.formation-tab:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.formation-tab.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.formation-content {
+    display: none;
+}
+
+.formation-content.active {
+    display: block;
+}
+
 /* Partitions */
 .partitions-programme {
     margin-bottom: 32px;
