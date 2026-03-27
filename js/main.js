@@ -82,6 +82,74 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Audio Player ---
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalTimeEl = document.getElementById('totalTime');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeIcon = document.getElementById('volumeIcon');
+
+    if (audio && playBtn) {
+        // Set initial volume
+        audio.volume = 0.8;
+
+        // Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.className = 'fas fa-pause';
+            } else {
+                audio.pause();
+                playIcon.className = 'fas fa-play';
+            }
+        });
+
+        // Format time
+        function formatTime(s) {
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return m + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
+        // Update progress
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = pct + '%';
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+
+        // Duration loaded
+        audio.addEventListener('loadedmetadata', () => {
+            totalTimeEl.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const pct = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pct * audio.duration;
+        });
+
+        // Volume
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+            volumeIcon.className = audio.volume == 0 ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+        });
+
+        // Reset on end
+        audio.addEventListener('ended', () => {
+            playIcon.className = 'fas fa-play';
+            progressFill.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+        });
+    }
+
     // --- Contact form handler ---
     const form = document.getElementById('contactForm');
     if (form) {
