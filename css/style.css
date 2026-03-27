@@ -1345,6 +1345,39 @@ img {
         radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.1) 0%, transparent 50%);
 }
 
+/* Règlement */
+.reglement-articles {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.reglement-article {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.reglement-article:last-child {
+    border-bottom: none;
+}
+
+.reglement-article h3 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.reglement-article p {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.reglement-article p:last-child {
+    margin-bottom: 0;
+}
+
 .ecole-logo-img {
     width: 100%;
     max-width: 450px;

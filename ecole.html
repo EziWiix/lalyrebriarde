@@ -40,20 +40,37 @@
         <p>Apprenez, progressez, jouez !</p>
     </section>
 
+    <!-- Onglets école -->
+    <section class="section" style="padding-bottom: 0;">
+        <div class="container">
+            <div class="formations-tabs">
+                <button class="formation-tab active" data-tab="ecole-info"><i class="fas fa-music"></i> L'&eacute;cole</button>
+                <button class="formation-tab" data-tab="ecole-tarifs"><i class="fas fa-euro-sign"></i> Tarifs</button>
+                <button class="formation-tab" data-tab="ecole-reglement"><i class="fas fa-gavel"></i> R&egrave;glement</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- === TAB L'ÉCOLE === -->
+    <div class="formation-content active" id="tab-ecole-info">
+
     <!-- Intro -->
     <section class="section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Formation</span>
-                <h2 class="section-title">Apprendre la musique avec nous</h2>
+                <span class="section-tag">Depuis 1996</span>
+                <h2 class="section-title">&Eacute;cole de musique Crescendo</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="about-grid">
                 <div class="about-text">
-                    <p class="lead">Notre &eacute;cole de musique accueille les &eacute;l&egrave;ves d&egrave;s 7 ans, d&eacute;butants ou confirm&eacute;s.</p>
-                    <p>Encadr&eacute;s par des musiciens exp&eacute;riment&eacute;s de l'harmonie, les &eacute;l&egrave;ves apprennent le solf&egrave;ge et la pratique instrumentale dans une ambiance conviviale et bienveillante.</p>
-                    <p>L'objectif : permettre &agrave; chacun de progresser &agrave; son rythme et d'int&eacute;grer l'harmonie lorsqu'il se sent pr&ecirc;t. La musique d'ensemble est au c&oelig;ur de notre p&eacute;dagogie.</p>
-                    <a href="contact.html" class="btn btn-primary">S'inscrire <i class="fas fa-arrow-right"></i></a>
+                    <p class="lead">L'&eacute;cole de musique Crescendo a &eacute;t&eacute; cr&eacute;&eacute;e le 1er avril 1996.</p>
+                    <p>Jacky Salmon, en 1976, cr&eacute;a l'&eacute;cole de musique dans le but de former des musiciens pour combler les rangs. Il en assura les cours jusqu'en 1995, puis la dota de cinq professeurs pour r&eacute;pondre aux nombreuses demandes d'&eacute;l&egrave;ves de tous &acirc;ges.</p>
+                    <p><strong>La vocation de l'&eacute;cole de musique Crescendo est de promouvoir la pratique de la musique gr&acirc;ce &agrave; l'initiation, &agrave; des repr&eacute;sentations et &agrave; la formation.</strong></p>
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+                        <a href="https://drive.google.com/file/d/1lPUby5K5JGb78sYuErIumCVAUsu0MfzN/view" target="_blank" class="btn btn-primary"><i class="fas fa-file-alt"></i> Fiche d'inscription</a>
+                        <a href="https://drive.google.com/file/d/1aw-xsd4OZwFVktzYkMY1gMNoE6nH-l9m/view" target="_blank" class="btn btn-outline"><i class="fas fa-euro-sign"></i> Tarifs</a>
+                    </div>
                 </div>
                 <div class="about-image">
                     <img src="images/logo-ecole.png" alt="&Eacute;cole de musique Crescendo" class="ecole-logo-img">
@@ -62,51 +79,190 @@
         </div>
     </section>
 
-    <!-- Instruments enseignés -->
-    <section class="section" style="background: var(--gray-100);">
+    <!-- Ce que nous proposons -->
+    <section class="section" style="background: var(--dark); color: var(--white);">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Instruments</span>
-                <h2 class="section-title">Les instruments enseign&eacute;s</h2>
+                <span class="section-tag" style="color: var(--gold);">Nos cours</span>
+                <h2 class="section-title" style="color: var(--white);">Ce que nous proposons</h2>
                 <div class="section-divider"></div>
             </div>
-            <div class="instruments-grid">
-                <div class="instrument-card">
-                    <i class="fas fa-trumpet"></i>
-                    <h3>Trompette / Cornet</h3>
-                    <p>L'instrument roi de l'harmonie, brillant et puissant.</p>
+            <div class="info-boxes" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="info-box" style="background: var(--dark-lighter); border-left-color: var(--gold);">
+                    <h3 style="color: var(--white);"><i class="fas fa-music" style="color: var(--gold);"></i> Instruments</h3>
+                    <p style="color: var(--gray-300);">Piano, accord&eacute;on, m&eacute;lodica, fl&ucirc;tes (&agrave; bec et traversi&egrave;re), saxophone, clarinette, guitare (classique, &eacute;lectrique), basse &eacute;lectrique, violon, batterie, percussions, trompette, trombone, tuba, cor, saxhorn.</p>
                 </div>
-                <div class="instrument-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Clarinette</h3>
-                    <p>Incontournable de l'harmonie, avec un son chaud et expressif.</p>
+                <div class="info-box" style="background: var(--dark-lighter); border-left-color: var(--gold);">
+                    <h3 style="color: var(--white);"><i class="fas fa-microphone-alt" style="color: var(--gold);"></i> Ensembles vocaux</h3>
+                    <p style="color: var(--gray-300);">Depuis 2019, l'&eacute;cole propose deux ensembles vocaux. Vous souhaitez chanter en chorale ? Vous trouverez s&ucirc;rement le r&eacute;pertoire qui vous convient.</p>
                 </div>
-                <div class="instrument-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Saxophone</h3>
-                    <p>Du soprano au baryton, polyvalent et appr&eacute;ci&eacute; de tous.</p>
+                <div class="info-box" style="background: var(--dark-lighter); border-left-color: var(--gold);">
+                    <h3 style="color: var(--white);"><i class="fas fa-child" style="color: var(--gold);"></i> &Eacute;veil musical</h3>
+                    <p style="color: var(--gray-300);">L'&eacute;cole propose des cours d'&eacute;veil musical pour les enfants &agrave; partir de <strong>3 ans</strong>.</p>
                 </div>
-                <div class="instrument-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Fl&ucirc;te traversi&egrave;re</h3>
-                    <p>L&eacute;g&egrave;re et m&eacute;lodieuse, id&eacute;ale pour commencer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Orchestres des élèves -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Sur sc&egrave;ne</span>
+                <h2 class="section-title">Les orchestres d'&eacute;l&egrave;ves</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p class="lead">En 2015, l'orchestre des &eacute;l&egrave;ves a &eacute;t&eacute; cr&eacute;&eacute; pour permettre aux &eacute;l&egrave;ves d&eacute;butants de go&ucirc;ter aux joies de la sc&egrave;ne.</p>
+                    <p>Les partitions sont adapt&eacute;es au niveau des &eacute;l&egrave;ves et le r&eacute;pertoire est un astucieux m&eacute;lange de classique, de jazz, de com&eacute;dies musicales...</p>
+                    <p>En <strong>2021</strong>, l'<strong>Orchestre Mini</strong> voit le jour, pour les plus jeunes musiciens.</p>
+                    <p>Chaque ann&eacute;e, les professeurs organisent une audition des &eacute;l&egrave;ves afin que les parents et les sympathisants puissent constater les progr&egrave;s des &eacute;l&egrave;ves.</p>
                 </div>
-                <div class="instrument-card">
-                    <i class="fas fa-music"></i>
-                    <h3>Trombone / Tuba</h3>
-                    <p>Les cuivres graves, piliers de l'harmonie pour les basses.</p>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-users"></i>
+                        <span>Photo de l'orchestre des &eacute;l&egrave;ves</span>
+                    </div>
                 </div>
-                <div class="instrument-card">
-                    <i class="fas fa-drum"></i>
-                    <h3>Percussions</h3>
-                    <p>Batterie, timbales, xylophone... Le rythme au c&oelig;ur de la musique.</p>
+            </div>
+        </div>
+    </section>
+
+    </div><!-- fin tab école -->
+
+    <!-- === TAB TARIFS === -->
+    <div class="formation-content" id="tab-ecole-tarifs">
+
+    <!-- Tarifs -->
+    <section class="section" id="tarifs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Saison 2025/2026</span>
+                <h2 class="section-title">Tarifs</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Instruments -->
+            <div class="members-section">
+                <h3><i class="fas fa-trumpet"></i> Instruments</h3>
+                <div class="members-table-wrapper">
+                    <table class="members-table">
+                        <thead>
+                            <tr>
+                                <th>Dur&eacute;e du cours</th>
+                                <th>Annuel</th>
+                                <th>Trimestriel</th>
+                                <th>Mensuel / 10 mois</th>
+                                <th>Mensuel / 12 mois</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20 minutes</td>
+                                <td><strong>515,00 &euro;</strong></td>
+                                <td>171,67 &euro;</td>
+                                <td>51,50 &euro;</td>
+                                <td>42,92 &euro;</td>
+                            </tr>
+                            <tr>
+                                <td>30 minutes</td>
+                                <td><strong>705,60 &euro;</strong></td>
+                                <td>235,20 &euro;</td>
+                                <td>70,56 &euro;</td>
+                                <td>58,80 &euro;</td>
+                            </tr>
+                            <tr>
+                                <td>45 minutes</td>
+                                <td><strong>896,10 &euro;</strong></td>
+                                <td>298,70 &euro;</td>
+                                <td>89,61 &euro;</td>
+                                <td>74,67 &euro;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Solfège -->
+            <div class="members-section">
+                <h3><i class="fas fa-book-open"></i> Solf&egrave;ge</h3>
+                <div class="members-table-wrapper">
+                    <table class="members-table">
+                        <thead>
+                            <tr>
+                                <th>Dur&eacute;e du cours</th>
+                                <th>Annuel</th>
+                                <th>Trimestriel</th>
+                                <th>Mensuel / 10 mois</th>
+                                <th>Mensuel / 12 mois</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>45 minutes</td>
+                                <td><strong>252,35 &euro;</strong></td>
+                                <td>84,12 &euro;</td>
+                                <td>25,23 &euro;</td>
+                                <td>21,03 &euro;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Ensemble Vocal -->
+            <div class="members-section">
+                <h3><i class="fas fa-microphone-alt"></i> Ensemble Vocal</h3>
+                <div class="members-table-wrapper">
+                    <table class="members-table">
+                        <thead>
+                            <tr>
+                                <th>Dur&eacute;e du cours</th>
+                                <th>Annuel</th>
+                                <th>Trimestriel</th>
+                                <th>Mensuel / 10 mois</th>
+                                <th>Mensuel / 12 mois</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 heure 30</td>
+                                <td><strong>160,00 &euro;</strong></td>
+                                <td>53,34 &euro;</td>
+                                <td>16,00 &euro;</td>
+                                <td>13,34 &euro;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Cotisation -->
+            <div class="members-section">
+                <h3><i class="fas fa-hand-holding-heart"></i> Cotisation annuelle</h3>
+                <div class="info-boxes">
+                    <div class="info-box">
+                        <ul>
+                            <li><strong>30,00 &euro;</strong> &mdash; 1er inscrit</li>
+                            <li><strong>15,00 &euro;</strong> &mdash; 2&egrave;me inscrit d'une m&ecirc;me famille</li>
+                            <li><strong>10,00 &euro;</strong> &mdash; 3&egrave;me inscrit</li>
+                            <li><strong>Gratuit</strong> &mdash; &agrave; partir du 4&egrave;me</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fas fa-download"></i> Documents</h3>
+                        <p style="margin-bottom: 12px;">T&eacute;l&eacute;chargez les documents pour l'inscription :</p>
+                        <a href="https://drive.google.com/file/d/1lPUby5K5JGb78sYuErIumCVAUsu0MfzN/view" target="_blank" class="btn btn-primary" style="margin-bottom: 8px;"><i class="fas fa-file-alt"></i> Fiche d'inscription</a><br>
+                        <a href="https://drive.google.com/file/d/1aw-xsd4OZwFVktzYkMY1gMNoE6nH-l9m/view" target="_blank" class="btn btn-outline"><i class="fas fa-file-pdf"></i> Tarifs PDF</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Infos pratiques -->
-    <section class="section">
+    <section class="section" style="background: var(--gray-100);">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Pratique</span>
@@ -123,14 +279,6 @@
                     </ul>
                 </div>
                 <div class="info-box">
-                    <h3><i class="fas fa-euro-sign"></i> Tarifs</h3>
-                    <ul>
-                        <li>Cotisation annuelle : 80&euro; (- de 18 ans)</li>
-                        <li>Cotisation annuelle : 120&euro; (adultes)</li>
-                        <li>Pr&ecirc;t d'instrument possible</li>
-                    </ul>
-                </div>
-                <div class="info-box">
                     <h3><i class="fas fa-user-check"></i> Conditions</h3>
                     <ul>
                         <li>&Agrave; partir de 7 ans</li>
@@ -140,12 +288,98 @@
                 </div>
                 <div class="info-box">
                     <h3><i class="fas fa-map-pin"></i> Lieu</h3>
-                    <p>Salle des f&ecirc;tes de la commune, accessible et &eacute;quip&eacute;e pour la pratique musicale.</p>
+                    <p>Salle des f&ecirc;tes de Boissy-le-Ch&acirc;tel</p>
                     <p style="margin-top: 8px;"><strong>Parking gratuit &agrave; proximit&eacute;</strong></p>
                 </div>
             </div>
         </div>
     </section>
+
+    </div><!-- fin tab tarifs -->
+
+    <!-- === TAB RÈGLEMENT === -->
+    <div class="formation-content" id="tab-ecole-reglement">
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&Eacute;cole de musique Crescendo</span>
+                <h2 class="section-title">R&egrave;glement int&eacute;rieur</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="reglement-articles">
+                <div class="reglement-article">
+                    <h3>Article 1 &mdash; Cotisations</h3>
+                    <p>La formation musicale (solf&egrave;ge) &eacute;tant consid&eacute;r&eacute;e obligatoire, le total des cotisations solf&egrave;ge et instrument est d&ucirc; par chaque &eacute;l&egrave;ve &eacute;tudiant un instrument.</p>
+                    <p>Toutefois, un &eacute;l&egrave;ve pratiquant solf&egrave;ge et instrument sur deux cycles diff&eacute;rents se verra appliquer la tarification du cycle instrument.</p>
+                    <p><strong>Aucun &eacute;l&egrave;ve ne peut &ecirc;tre dispens&eacute; du paiement des cotisations sous pr&eacute;texte qu'il a manqu&eacute; des cours.</strong></p>
+                    <p>La d&eacute;mission d'un &eacute;l&egrave;ve n'entra&icirc;ne pas le remboursement de son adh&eacute;sion annuelle.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 2 &mdash; R&egrave;glement des cours</h3>
+                    <p>Le r&egrave;glement des cours de l'&eacute;l&egrave;ve &agrave; l'&eacute;cole de musique est &agrave; effectuer dans son int&eacute;gralit&eacute; le jour de l'inscription. Il est &agrave; la convenance du souscripteur en 10 ou 12 fois, par virements ou par ch&egrave;ques. Les dates de d&eacute;bits des ch&egrave;ques peuvent &ecirc;tre le 5, 15 ou 25 de chaque mois.</p>
+                    <p>Les droits d'adh&eacute;sion font l'objet d'un seul r&egrave;glement non fractionn&eacute;.</p>
+                    <p>Tout &eacute;l&egrave;ve d&eacute;sirant quitter l'&eacute;cole de musique de son propre fait en cours d'ann&eacute;e ne pourra pr&eacute;tendre &agrave; un remboursement, sauf cas grave, longue maladie ou mutation.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 3 &mdash; P&eacute;riode d'essai</h3>
+                    <p>Il est accept&eacute; une p&eacute;riode d'essai de deux mois &agrave; la date d'inscription. L'engagement pour le restant de l'ann&eacute;e est concr&eacute;tis&eacute; par l'acquittement du solde restant d&ucirc;.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 4 &mdash; Assiduit&eacute;</h3>
+                    <p>Les &eacute;l&egrave;ves sont tenus d'assister r&eacute;guli&egrave;rement aux cours auxquels ils sont inscrits. En cas d'absence, m&ecirc;me de derni&egrave;re minute, l'&eacute;l&egrave;ve devra pr&eacute;venir son professeur et envoyer un mail &agrave; <strong>vpedm@lalyrebriarde.fr</strong>. Dans ce cas, le professeur n'est pas tenu de remplacer le cours.</p>
+                    <p>Les cours collectifs ne peuvent &ecirc;tre remplac&eacute;s sauf sur proposition du professeur.</p>
+                    <p><strong>Les cours ne sont pas publics.</strong></p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 5 &mdash; Conduite</h3>
+                    <p>Chaque &eacute;l&egrave;ve devra, au sein de l'&eacute;cole de musique, t&eacute;moigner d'une conduite parfaite, effectuer ses d&eacute;placements ainsi que ses moments d'attente dans le silence afin de ne pas g&ecirc;ner le d&eacute;roulement des cours.</p>
+                    <p><strong>Tout &eacute;cart de conduite pourra entra&icirc;ner le renvoi de l'&eacute;cole.</strong></p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 6 &mdash; D&eacute;gradations</h3>
+                    <p>Toutes d&eacute;gradations effectu&eacute;es par un &eacute;l&egrave;ve sur le mat&eacute;riel ou les locaux de l'&eacute;cole de musique entra&icirc;neront des sanctions envers cet &eacute;l&egrave;ve ; les responsables l&eacute;gaux devront s'acquitter des frais occasionn&eacute;s &agrave; la hauteur du pr&eacute;judice.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 7 &mdash; Responsables l&eacute;gaux</h3>
+                    <p>Les responsables l&eacute;gaux sont tenus d'amener leurs enfants &agrave; l'heure pr&eacute;vue pour leurs cours et de les reprendre &agrave; l'issue de ceux-ci.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 8 &mdash; Responsabilit&eacute;</h3>
+                    <p>L'association n'est pas responsable des enfants en dehors de leurs heures de cours et de ses locaux.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 9 &mdash; Musique d'ensemble</h3>
+                    <p>La pratique de la musique d'ensemble &agrave; la Lyre Briarde est une activit&eacute; compl&eacute;mentaire et n&eacute;cessaire pour tout &eacute;l&egrave;ve de l'&eacute;cole de musique. <strong>L'objectif de l'&eacute;cole &eacute;tant d'assurer l'avenir de l'association</strong>, il serait souhaitable que les &eacute;l&egrave;ves d'un niveau d'instrument d&eacute;termin&eacute; et sur d&eacute;cision des responsables, en concertation avec les professeurs, participent aux ensembles musicaux de l'association.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 10 &mdash; Enseignement</h3>
+                    <p>Chaque professeur enseignant devra assurer ses cours (au nombre de 34 cours par ann&eacute;e) dans le cadre du programme &eacute;tabli en d&eacute;but d'ann&eacute;e scolaire et modulable, s'il y a lieu, en cours d'ann&eacute;e selon les besoins du professeur ou de l'association.</p>
+                    <p>En cas d'absence du professeur, le cours sera remplac&eacute; par celui-ci &agrave; une date ult&eacute;rieure.</p>
+                </div>
+
+                <div class="reglement-article">
+                    <h3>Article 11 &mdash; Examens et progression</h3>
+                    <p>Le niveau musical de chaque &eacute;l&egrave;ve sera &eacute;valu&eacute;, en fin d'ann&eacute;e, par un examen annuel. Des appr&eacute;ciations seront d&eacute;cern&eacute;es selon les r&eacute;sultats. Un &eacute;l&egrave;ve ne pourra passer deux niveaux conjoints d'examens, &agrave; la condition d'avoir &eacute;t&eacute; re&ccedil;u dans le niveau le plus faible.</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; font-style: italic; color: var(--gray-700);">
+                <em>Je reconnais avoir re&ccedil;u et pris connaissance du r&egrave;glement int&eacute;rieur de l'&Eacute;cole de musique de la Lyre Briarde et m'engage &agrave; le respecter et l'appliquer sous toutes ses formes.</em>
+            </p>
+            <p style="text-align: right; margin-top: 8px; color: var(--gray-500); font-size: 0.85rem;">Vu le Conseil d'administration</p>
+        </div>
+    </section>
+    </div><!-- fin tab règlement -->
 
     <!-- CTA -->
     <section class="section section-join">
@@ -186,13 +420,13 @@
                     <h4>Contact</h4>
                     <ul class="footer-contact">
                         <li><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel (77169)</li>
-                        <li><i class="fas fa-envelope"></i> contact@lalyrebriarde.com</li>
-                        <li><i class="fas fa-phone"></i> 01 23 45 67 89</li>
+                        <li><i class="fas fa-envelope"></i> contact@lalyrebriarde.fr</li>
+                        <li><i class="fas fa-phone"></i> 06 43 76 27 78</li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>R&eacute;p&eacute;titions</h4>
-                    <p>Tous les vendredis soir de 20h30 &agrave; 22h30 &agrave; la salle des f&ecirc;tes.</p>
+                    <p>Orchestre : Lundi 20h30-22h15<br>Marching : Jeudi 20h30-22h00<br>Fanfare : Jeudi 1x/mois</p>
                     <p class="footer-highlight">Nouveaux musiciens bienvenus !</p>
                 </div>
             </div>
