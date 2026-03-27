@@ -413,11 +413,9 @@ img {
     flex-shrink: 0;
 }
 
-.player-artwork img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 6px;
+.player-artwork i {
+    font-size: 1.5rem;
+    color: var(--white);
 }
 
 .player-details {
