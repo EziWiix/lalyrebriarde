@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Membres | La Lyre Briarde</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="La Lyre Briarde" class="logo-img">
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="prestations.html" class="nav-link">Nos Prestations</a>
+                <a href="histoire.html" class="nav-link">Notre Histoire</a>
+                <a href="ecole.html" class="nav-link">Notre &Eacute;cole</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="membres.html" class="nav-link active"><i class="fas fa-lock"></i> Membres</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-lock"></i> Espace Membres</h1>
+        <p>R&eacute;serv&eacute; aux musiciens</p>
+    </section>
+
+    <!-- Login Screen -->
+    <section class="section" id="loginSection">
+        <div class="container">
+            <div class="login-wrapper">
+                <div class="login-card">
+                    <div class="login-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h2>Acc&egrave;s r&eacute;serv&eacute;</h2>
+                    <p>Entrez le mot de passe pour acc&eacute;der &agrave; l'espace membres.</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <input type="password" id="passwordInput" placeholder="Mot de passe" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-sign-in-alt"></i> Acc&eacute;der
+                        </button>
+                        <p class="login-error" id="loginError" style="display: none;">
+                            <i class="fas fa-exclamation-circle"></i> Mot de passe incorrect
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Content (hidden by default) -->
+    <section class="section" id="membersContent" style="display: none;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Bienvenue</span>
+                <h2 class="section-title">Espace Membres</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <!-- Prochaine répétition -->
+            <div class="members-alert">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <strong>Prochaine r&eacute;p&eacute;tition :</strong> Vendredi 28 mars 2026 &mdash; 20h30 &agrave; 22h30
+                    <br><span class="members-alert-sub">Salle des f&ecirc;tes de Boissy-le-Ch&acirc;tel</span>
+                </div>
+            </div>
+
+            <!-- Annonces -->
+            <div class="members-section">
+                <h3><i class="fas fa-bullhorn"></i> Annonces</h3>
+                <div class="members-cards">
+                    <div class="members-card">
+                        <span class="members-card-date">27 Mars 2026</span>
+                        <h4>Concert de Printemps</h4>
+                        <p>Le concert de printemps aura lieu le <strong>samedi 12 avril &agrave; 20h30</strong>. R&eacute;p&eacute;tition g&eacute;n&eacute;rale le vendredi 11 avril. Pr&eacute;sence obligatoire.</p>
+                    </div>
+                    <div class="members-card">
+                        <span class="members-card-date">20 Mars 2026</span>
+                        <h4>Nouvelles partitions</h4>
+                        <p>De nouvelles partitions ont &eacute;t&eacute; distribu&eacute;es. Pensez &agrave; les travailler avant la prochaine r&eacute;p&eacute;tition.</p>
+                    </div>
+                    <div class="members-card">
+                        <span class="members-card-date">15 Mars 2026</span>
+                        <h4>Cotisations</h4>
+                        <p>Rappel : les cotisations annuelles sont &agrave; r&eacute;gler avant fin mars. Voir le tr&eacute;sorier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planning -->
+            <div class="members-section">
+                <h3><i class="fas fa-calendar-alt"></i> Planning</h3>
+                <div class="members-table-wrapper">
+                    <table class="members-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>&Eacute;v&eacute;nement</th>
+                                <th>Lieu</th>
+                                <th>Heure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>28/03/2026</td>
+                                <td>R&eacute;p&eacute;tition</td>
+                                <td>Salle des f&ecirc;tes</td>
+                                <td>20h30</td>
+                            </tr>
+                            <tr>
+                                <td>04/04/2026</td>
+                                <td>R&eacute;p&eacute;tition</td>
+                                <td>Salle des f&ecirc;tes</td>
+                                <td>20h30</td>
+                            </tr>
+                            <tr>
+                                <td>11/04/2026</td>
+                                <td>R&eacute;p&eacute;tition g&eacute;n&eacute;rale</td>
+                                <td>Salle des f&ecirc;tes</td>
+                                <td>20h00</td>
+                            </tr>
+                            <tr class="members-table-highlight">
+                                <td>12/04/2026</td>
+                                <td><strong>Concert de Printemps</strong></td>
+                                <td>Salle des f&ecirc;tes</td>
+                                <td>20h30</td>
+                            </tr>
+                            <tr>
+                                <td>08/05/2026</td>
+                                <td>Comm&eacute;moration 8 mai</td>
+                                <td>Monument aux morts</td>
+                                <td>10h30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Infos pratiques -->
+            <div class="members-section">
+                <h3><i class="fas fa-info-circle"></i> Infos pratiques</h3>
+                <div class="info-boxes">
+                    <div class="info-box">
+                        <h3><i class="fas fa-clock"></i> R&eacute;p&eacute;titions</h3>
+                        <ul>
+                            <li>Tous les vendredis de 20h30 &agrave; 22h30</li>
+                            <li>Salle des f&ecirc;tes de Boissy-le-Ch&acirc;tel</li>
+                            <li>Pr&eacute;venir en cas d'absence</li>
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fas fa-phone"></i> Contacts</h3>
+                        <ul>
+                            <li>Pr&eacute;sident : &agrave; compl&eacute;ter</li>
+                            <li>Chef d'orchestre : &agrave; compl&eacute;ter</li>
+                            <li>Tr&eacute;sorier : &agrave; compl&eacute;ter</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Déconnexion -->
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="btn btn-outline" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Se d&eacute;connecter
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <div class="footer-logo"><img src="images/logo.png" alt="La Lyre Briarde" class="footer-logo-img"><span>La Lyre Briarde</span></div>
+                    <p>Harmonie municipale de Boissy-le-Ch&acirc;tel depuis 1881. Animation de la vie culturelle et musicale de notre commune.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="prestations.html">Nos Prestations</a></li>
+                        <li><a href="histoire.html">Notre Histoire</a></li>
+                        <li><a href="ecole.html">Notre &Eacute;cole</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel (77169)</li>
+                        <li><i class="fas fa-envelope"></i> contact@lalyrebriarde.com</li>
+                        <li><i class="fas fa-phone"></i> 01 23 45 67 89</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>R&eacute;p&eacute;titions</h4>
+                    <p>Tous les vendredis soir de 20h30 &agrave; 22h30 &agrave; la salle des f&ecirc;tes.</p>
+                    <p class="footer-highlight">Nouveaux musiciens bienvenus !</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 La Lyre Briarde. Tous droits r&eacute;serv&eacute;s.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Members password protection
+        const PASS_HASH = '03ac674216f3e15c761ee1a5e77f3bdb4dc7d1b3dc310a9e';
+
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash |= 0;
+            }
+            return hash.toString();
+        }
+
+        const loginForm = document.getElementById('loginForm');
+        const loginSection = document.getElementById('loginSection');
+        const membersContent = document.getElementById('membersContent');
+        const loginError = document.getElementById('loginError');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Check if already logged in
+        if (sessionStorage.getItem('membres_auth') === 'true') {
+            loginSection.style.display = 'none';
+            membersContent.style.display = 'block';
+        }
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const password = document.getElementById('passwordInput').value;
+
+            if (password === '1234') {
+                sessionStorage.setItem('membres_auth', 'true');
+                loginSection.style.display = 'none';
+                membersContent.style.display = 'block';
+                loginError.style.display = 'none';
+            } else {
+                loginError.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('membres_auth');
+            loginSection.style.display = 'block';
+            membersContent.style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        });
+    </script>
+</body>
+</html>
