@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livre d'Or | La Lyre Briarde</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="La Lyre Briarde" class="logo-img">
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="prestations.html" class="nav-link">Nos Prestations</a>
+                <a href="histoire.html" class="nav-link">Notre Histoire</a>
+                <a href="ecole.html" class="nav-link">Notre &Eacute;cole</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="livre-dor.html" class="nav-link active"><i class="fas fa-feather-alt"></i> Livre d'Or</a>
+                <a href="membres.html" class="nav-link"><i class="fas fa-lock"></i> Membres</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-feather-alt"></i> Livre d'Or</h1>
+        <p>Vos t&eacute;moignages nous touchent</p>
+    </section>
+
+    <!-- Formulaire -->
+    <section class="section" style="background: var(--gray-100);">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Partagez</span>
+                <h2 class="section-title">Laissez-nous un message</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="login-wrapper">
+                <form class="contact-form" name="livre-dor" method="POST" data-netlify="true" style="max-width: 550px;">
+                    <input type="hidden" name="form-name" value="livre-dor">
+                    <div class="form-group">
+                        <label for="guestName">Votre nom *</label>
+                        <input type="text" id="guestName" name="nom" required placeholder="Votre nom">
+                    </div>
+                    <div class="form-group">
+                        <label for="guestMessage">Votre message *</label>
+                        <textarea id="guestMessage" name="message" required placeholder="Partagez votre exp&eacute;rience, un souvenir, un mot gentil..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i> Envoyer mon message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Messages -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">25 messages</span>
+                <h2 class="section-title">Vos messages</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="guestbook">
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Francis</strong>
+                        <span class="guest-date">29 novembre 2025</span>
+                    </div>
+                    <p>Formidable concert de la Sainte C&eacute;cile Saint Jean les deux jumeaux.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bernard POTHIER</strong>
+                        <span class="guest-date">30 mai 2024</span>
+                    </div>
+                    <p>C'&eacute;tait FORMIDABLE &agrave; quand un CD RICARDO</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Claude</strong>
+                        <span class="guest-date">27 mai 2024</span>
+                    </div>
+                    <p>Concert exceptionnel !<br>Je vous remercie pour ce magnifique moment avec des personnes remplies de talents !<br>Nous reviendrons !</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bougriot S&eacute;verine et Thomas</strong>
+                        <span class="guest-date">26 mai 2024</span>
+                    </div>
+                    <p>Une fois de plus un merveilleux concert une ambiance g&eacute;niale : de l'humour, de l'&eacute;motion... bref tout ce qu'il faut pour passer un excellent moment. Merci aux "ensembles vocaux". Plus s&eacute;rieusement une tr&egrave;s belle innovation et bravo &agrave; Mrs S&eacute;bastien et Mounir et bravo d'ouvrir une section "chorale" &agrave; Boissy. Merci. &Agrave; tr&egrave;s bient&ocirc;t j'esp&egrave;re et merci encore pour tout le bonheur et les &eacute;motions que la musique, via vous tous, nous apporte.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Thomas (&agrave; la Roche)</strong>
+                        <span class="guest-date">26 mai 2024</span>
+                    </div>
+                    <p>Super spectacle, super formation avec une ovation sp&eacute;ciale pour les Aristochats !! G&eacute;nial<br>Merci</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Kadi &Eacute;lisabeth</strong>
+                        <span class="guest-date">19 avril 2024</span>
+                    </div>
+                    <p>Un grand merci &agrave; tous pour cette soir&eacute;e &agrave; Marolles en Brie. Quelle &eacute;nergie ce chef !!! Nous avons pris beaucoup de plaisir avec mes 3 filles.<br>Nous continuerons &agrave; venir vous rencontrer !</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Naud&eacute;</strong>
+                        <span class="guest-date">19 avril 2024</span>
+                    </div>
+                    <p>Excellente repr&eacute;sentation. Bravo &agrave; tous et toutes ainsi qu'&agrave; mourir. Super soir&eacute;e. A bient&ocirc;t</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Costard Thibaud</strong>
+                        <span class="guest-date">1er avril 2024</span>
+                    </div>
+                    <p>J'ai rarement vu un orchestre avec un tel niveau, j'en ai prit plein les oreilles, frissons garantie, &eacute;motions, digne d'un grand orchestre. Vous avez fait un travail d'exception et c'est avec grand plaisir que je reviendrais vois &eacute;couter et peu &ecirc;tre pourquoi pas un jour int&eacute;grer l'orchestre, qui sait.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Magali</strong>
+                        <span class="guest-date">29 mars 2024</span>
+                    </div>
+                    <p>Concert &agrave; St Jean les Deux Jumeaux magnifique!!! Pr&eacute;sentatrice dou&eacute;e d'humour et d'un talent d'oratrice. Tr&egrave;s bonne ambiance, conviviale. Pr&eacute;sentation sympa des instruments.<br>MERCI pour cette soir&eacute;e sur le th&egrave;me des musiques Disney.<br>Nous avons pass&eacute; un excellent moment!<br>BRAVO!!! Nous reviendrons vous &eacute;couter avec grand plaisir</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Desfontaine</strong>
+                        <span class="guest-date">28 novembre 2023</span>
+                    </div>
+                    <p>C'est la seconde fois que j'assiste &agrave; un concert de la Lyrebriarde, et vraiment j'ai beaucoup aim&eacute;, c'est un bel orchestre, bravo &agrave; tous.<br>PS : petit b&eacute;mol, on ne comprend absolument pas les annonces de morceaux au micro, trop de r&eacute;sonance, sans micro se serait mieux.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Maillet Isabelle</strong>
+                        <span class="guest-date">26 novembre 2023</span>
+                    </div>
+                    <p>Un superbe apr&egrave;s-midi &agrave; l'&eacute;glise de Boissy le Chatel. Merci &agrave; tous vous nous avez enchant&eacute; avec votre magnifique concert. Je reviendrai vous voir. Merci beaucoup</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bonnefoy Nathalie</strong>
+                        <span class="guest-date">26 novembre 2023</span>
+                    </div>
+                    <p>Merci pour cet bel apr&egrave;s midi. Quel plaisir de vous &eacute;couter.<br>Je suis une ancienne musicienne de la Lyre Briarde sous la direction Jackie Salmon.<br>Merci beaucoup. Bonne continuation</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Herv&eacute;</strong>
+                        <span class="guest-date">14 octobre 2023</span>
+                    </div>
+                    <p>Bravo et tr&egrave;s belle prestation &agrave; Marolles-en-Brie, merci.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Association CHANGIS Animations</strong>
+                        <span class="guest-date">6 juillet 2023</span>
+                    </div>
+                    <p>Merci pour cette superbe prestation qui a r&eacute;chauff&eacute; nos c&oelig;urs et illumin&eacute; notre Feu de la Saint Jean !</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Christine Poirier</strong>
+                        <span class="guest-date">18 avril 2023</span>
+                    </div>
+                    <p>Un grand merci pour ce beau moment pass&eacute; &agrave; vous &eacute;couter ce samedi 15 avril, en l'&eacute;glise de Boissy Le Ch&acirc;tel. Moment de voyage &agrave; travers musique et histoires celte.<br>Merci &agrave; tous pour le travail, et le coeur, que vous avez fourni pour nous offrir ce concert magnifique.<br>Finalement le changement de lieu aura &eacute;t&eacute;, &agrave; mon sens, une aubaine pour nous, le lieu et l'orchestre associ&eacute;s nous ont permis de passer un superbe moment en votre compagnie.<br>Vivement le prochain concert &agrave; th&egrave;me. Ce changement de r&eacute;pertoire est tr&egrave;s appr&eacute;ci&eacute;.<br>Merci encore &agrave; tous et &agrave; tr&egrave;s bient&ocirc;t.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bougriot S&eacute;verine</strong>
+                        <span class="guest-date">18 avril 2023</span>
+                    </div>
+                    <p>Que dire de ce magnifique moment partag&eacute; avec un grand nombre malgr&eacute; un changement de derni&egrave;re minute... Du bonheur, plaisir &agrave; l'&eacute;tat brut. Merci d'avoir "os&eacute;" sortie de votre zone de confort (et comme vous l'avez magnifiquement fait) avec ce concert de musiques celtiques. Merci &agrave; notre incomparable oratrice et pr&eacute;sentatrice qui nous fait tant rire.<br>La "Cornemuse &eacute;lectronique" nous a fait avoir bien des frissons...<br>Merci &agrave; tous de nous permettre de ressentir tant d'&eacute;motions diff&eacute;rentes &agrave; chaque fois. C'est une grande chance que de vous avoir au sein de notre Boissy.<br>Merci et bravo &agrave; tous.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>BURGOS V&Eacute;RONIQUE</strong>
+                        <span class="guest-date">16 avril 2023</span>
+                    </div>
+                    <p>Je suis encore sous le charme depuis hier ! Premier de vos concerts pour moi, j'ai &eacute;t&eacute; ravie ! Des frissons et chair de poule, jusqu'aux yeux humides parfois ! Encore Bravo !</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Lucie</strong>
+                        <span class="guest-date">15 avril 2023</span>
+                    </div>
+                    <p>Super concert, un merveilleux moment en votre compagnie ! Merci</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Georges</strong>
+                        <span class="guest-date">19 d&eacute;cembre 2022</span>
+                    </div>
+                    <p>Bonjour,<br>Je profite d'un passage sur le site pour vous laisser un petit mot : tr&egrave;s bon concert &agrave; St-R&eacute;my vendredi 9 d&eacute;cembre dernier, avec un beau programme.<br>Comme convenu, si j'ai entendu des fausses notes, je le garde pour moi !<br>Amiti&eacute;s musicales</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bocquillon</strong>
+                        <span class="guest-date">17 d&eacute;cembre 2022</span>
+                    </div>
+                    <p>Extraordinaire ! votre premier concert auquel j'ai assist&eacute; &agrave; l'occasion de la Ste C&eacute;cile.<br>Bravo &agrave; tous les musiciens et chef d'orchestre.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Sandrine</strong>
+                        <span class="guest-date">4 d&eacute;cembre 2022</span>
+                    </div>
+                    <p>Bravo &agrave; toutes et tous pour ce superbe concert !</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Bougriot</strong>
+                        <span class="guest-date">4 d&eacute;cembre 2022</span>
+                    </div>
+                    <p>Merci pour ce tr&egrave;s beau et bon moment musical en notre &eacute;glise de Boissy-le-Ch&acirc;tel &agrave; l'occasion de la sainte C&eacute;cile.<br>Une &eacute;motion intense tr&egrave;s bon choix de morceaux. Tr&egrave;s belles interpr&eacute;tations.<br>Un grand merci personnel pour avoir si joliment interpr&eacute;t&eacute; Music de John Miles.<br>Bravo &agrave; tous et h&acirc;te vous retrouver prochainement.</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Dominique</strong>
+                        <span class="guest-date">18 d&eacute;cembre 2021</span>
+                    </div>
+                    <p>Superbe soir&eacute;e &agrave; Changis sur Marne. Bravo &agrave; tous</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Muriel</strong>
+                        <span class="guest-date">28 novembre 2021</span>
+                    </div>
+                    <p>Superbe concert de la Sainte C&eacute;cile, tr&egrave;s agr&eacute;able &agrave; &eacute;couter, bravo &agrave; tous.<br>Merci encore pour l'apr&egrave;s concert, des bons petits fours en bonne compagnie.<br>Muriel</p>
+                </div>
+
+                <div class="guest-message">
+                    <div class="guest-header">
+                        <strong>Arrazat Mich&egrave;le</strong>
+                        <span class="guest-date">27 novembre 2021</span>
+                    </div>
+                    <p>Bonsoir.<br>Tr&egrave;s beau concert ce 27/11/21. Bravo.<br>Un seul regret sans micro on ne comprenait pas vos explications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <div class="footer-logo"><img src="images/logo.png" alt="La Lyre Briarde" class="footer-logo-img"><span>La Lyre Briarde</span></div>
+                    <p>Harmonie municipale de Boissy-le-Ch&acirc;tel depuis 1881. Animation de la vie culturelle et musicale de notre commune.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="prestations.html">Nos Prestations</a></li>
+                        <li><a href="histoire.html">Notre Histoire</a></li>
+                        <li><a href="ecole.html">Notre &Eacute;cole</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel (77169)</li>
+                        <li><i class="fas fa-envelope"></i> contact@lalyrebriarde.fr</li>
+                        <li><i class="fas fa-phone"></i> 06 43 76 27 78</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>R&eacute;p&eacute;titions</h4>
+                    <p>Orchestre : Lundi 20h30-22h15<br>Marching : Jeudi 20h30-22h00<br>Fanfare : Jeudi 1x/mois</p>
+                    <p class="footer-highlight">Nouveaux musiciens bienvenus !</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 La Lyre Briarde. Tous droits r&eacute;serv&eacute;s.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

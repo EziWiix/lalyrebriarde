@@ -1345,6 +1345,62 @@ img {
         radial-gradient(ellipse at 70% 30%, rgba(201,168,76,0.1) 0%, transparent 50%);
 }
 
+/* Livre d'Or */
+.guestbook {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.guest-message {
+    background: var(--gray-100);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    border-left: 4px solid var(--gold);
+    transition: all var(--transition);
+}
+
+.guest-message:hover {
+    box-shadow: var(--shadow);
+    transform: translateX(4px);
+}
+
+.guest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.guest-header strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--dark);
+}
+
+.guest-date {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    font-style: italic;
+}
+
+.guest-message p {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    line-height: 1.7;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .guest-message {
+        padding: 20px 24px;
+    }
+}
+
 /* Règlement */
 .reglement-articles {
     max-width: 800px;
