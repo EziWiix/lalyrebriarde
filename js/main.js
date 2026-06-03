@@ -150,22 +150,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Contact form handler ---
+    // --- Contact form handler (envoi via Web3Forms) ---
     const form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            if (!form.reportValidity()) return;
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Message envoy\u00e9 !';
-            btn.style.background = '#27ae60';
             btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.style.background = '';
-                btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+            const formData = new FormData(form);
+            const emailEl = form.querySelector('#email');
+            if (emailEl && emailEl.value) formData.set('replyto', emailEl.value);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data.success) throw new Error(data.message || 'Erreur');
+                btn.innerHTML = '<i class="fas fa-check"></i> Message envoy\u00e9 !';
+                btn.style.background = '#27ae60';
                 form.reset();
-            }, 3000);
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 4000);
+            })
+            .catch(() => {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                alert("Une erreur est survenue lors de l'envoi. Merci de r\u00e9essayer, ou de nous contacter directement par mail.");
+            });
         });
     }
 

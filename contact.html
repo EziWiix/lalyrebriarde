@@ -89,7 +89,11 @@
                     </div>
                 </div>
 
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" method="POST">
+                    <input type="hidden" name="access_key" value="cf04f012-b9a6-4557-b62d-4017d762fc91">
+                    <input type="hidden" name="subject" value="Nouveau message - Site La Lyre Briarde">
+                    <input type="hidden" name="from_name" value="Site La Lyre Briarde">
+                    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nom">Nom *</label>
