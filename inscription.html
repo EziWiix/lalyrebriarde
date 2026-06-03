@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription en ligne | La Lyre Briarde</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Styles spécifiques fiche d'inscription */
+        .inscription-form .members-section { margin-bottom: 36px; }
+        .inscription-form .members-section h3 {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 1.15rem; margin-bottom: 20px;
+            padding-bottom: 10px; border-bottom: 2px solid var(--gray-200);
+        }
+        .inscription-form .members-section h3 i { color: var(--gold); }
+        .field-hint { font-size: 0.78rem; color: var(--gray-500); margin-top: 6px; font-weight: 400; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+        .checkbox-group input[type="checkbox"] {
+            width: auto; margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px;
+            accent-color: var(--primary); cursor: pointer;
+        }
+        .checkbox-group label { margin-bottom: 0; font-weight: 400; cursor: pointer; line-height: 1.5; }
+        .form-note {
+            background: var(--gray-100); border-left: 3px solid var(--gold);
+            padding: 16px 20px; border-radius: var(--radius); margin-bottom: 32px;
+            font-size: 0.9rem; color: var(--gray-700);
+        }
+        .form-success {
+            display: none; text-align: center; padding: 48px 24px;
+            background: var(--gray-100); border-radius: var(--radius-lg);
+        }
+        .form-success.show { display: block; }
+        .form-success i { font-size: 3.5rem; color: #27ae60; margin-bottom: 16px; }
+        .form-success h3 { font-size: 1.5rem; margin-bottom: 12px; }
+        @media (max-width: 600px) {
+            .form-row-3 { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="La Lyre Briarde" class="logo-img">
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html" class="nav-link">Accueil</a>
+                <a href="prestations.html" class="nav-link">Nos Prestations</a>
+                <a href="histoire.html" class="nav-link">Notre Histoire</a>
+                <a href="ecole.html" class="nav-link active">Notre &Eacute;cole</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="livre-dor.html" class="nav-link"><i class="fas fa-feather-alt"></i> Livre d'Or</a>
+                <a href="membres.html" class="nav-link"><i class="fas fa-lock"></i> Membres</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1><i class="fas fa-pen-to-square"></i> Inscription en ligne</h1>
+        <p>&Eacute;cole de musique Crescendo &mdash; Saison 2025/2026</p>
+    </section>
+
+    <!-- Formulaire -->
+    <section class="section">
+        <div class="container">
+            <div style="max-width: 760px; margin: 0 auto;">
+
+                <!-- Message de succès (affiché après envoi) -->
+                <div class="form-success" id="formSuccess">
+                    <i class="fas fa-circle-check"></i>
+                    <h3>Inscription envoy&eacute;e !</h3>
+                    <p>Merci, votre demande d'inscription a bien &eacute;t&eacute; transmise &agrave; l'&eacute;cole de musique.<br>Nous vous recontacterons rapidement.</p>
+                    <a href="ecole.html" class="btn btn-primary" style="margin-top: 24px;"><i class="fas fa-arrow-left"></i> Retour &agrave; l'&eacute;cole</a>
+                </div>
+
+                <div class="form-note" id="formIntro">
+                    <i class="fas fa-circle-info" style="color: var(--gold);"></i>
+                    Remplissez ce formulaire pour pr&eacute;-inscrire un &eacute;l&egrave;ve. Les champs marqu&eacute;s d'un <strong>*</strong> sont obligatoires.
+                    Cette demande sera transmise &agrave; l'&eacute;cole, qui vous recontactera pour finaliser l'inscription.
+                </div>
+
+                <form class="contact-form inscription-form" id="inscriptionForm" name="inscription" method="POST"
+                      data-netlify="true" netlify-honeypot="bot-field">
+                    <input type="hidden" name="form-name" value="inscription">
+                    <p style="display:none;">
+                        <label>Ne pas remplir : <input name="bot-field"></label>
+                    </p>
+
+                    <!-- Élève -->
+                    <div class="members-section">
+                        <h3><i class="fas fa-user-graduate"></i> L'&eacute;l&egrave;ve</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eleve-nom">Nom *</label>
+                                <input type="text" id="eleve-nom" name="Eleve - Nom" required placeholder="Nom de l'&eacute;l&egrave;ve">
+                            </div>
+                            <div class="form-group">
+                                <label for="eleve-prenom">Pr&eacute;nom *</label>
+                                <input type="text" id="eleve-prenom" name="Eleve - Prenom" required placeholder="Pr&eacute;nom de l'&eacute;l&egrave;ve">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eleve-naissance">Date de naissance *</label>
+                                <input type="date" id="eleve-naissance" name="Eleve - Date de naissance" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eleve-tel">T&eacute;l&eacute;phone</label>
+                                <input type="tel" id="eleve-tel" name="Eleve - Telephone" placeholder="06 00 00 00 00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="eleve-email">Email *</label>
+                            <input type="email" id="eleve-email" name="Email de contact" required placeholder="votre@email.fr">
+                        </div>
+                        <div class="form-group">
+                            <label for="eleve-adresse">Adresse</label>
+                            <input type="text" id="eleve-adresse" name="Adresse" placeholder="N&deg; et nom de rue">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="eleve-cp">Code postal</label>
+                                <input type="text" id="eleve-cp" name="Code postal" placeholder="77169">
+                            </div>
+                            <div class="form-group">
+                                <label for="eleve-ville">Ville</label>
+                                <input type="text" id="eleve-ville" name="Ville" placeholder="Boissy-le-Ch&acirc;tel">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Responsable légal -->
+                    <div class="members-section">
+                        <h3><i class="fas fa-user-shield"></i> Responsable l&eacute;gal</h3>
+                        <p class="field-hint" style="margin-top:-12px; margin-bottom:20px;">&Agrave; remplir si l'&eacute;l&egrave;ve est mineur.</p>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="resp-nom">Nom et pr&eacute;nom</label>
+                                <input type="text" id="resp-nom" name="Responsable - Nom et prenom" placeholder="Nom du parent / tuteur">
+                            </div>
+                            <div class="form-group">
+                                <label for="resp-lien">Lien de parent&eacute;</label>
+                                <input type="text" id="resp-lien" name="Responsable - Lien de parente" placeholder="P&egrave;re, m&egrave;re, tuteur...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="resp-tel">T&eacute;l&eacute;phone du responsable</label>
+                            <input type="tel" id="resp-tel" name="Responsable - Telephone" placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+
+                    <!-- Formation souhaitée -->
+                    <div class="members-section">
+                        <h3><i class="fas fa-music"></i> Formation souhait&eacute;e</h3>
+                        <div class="form-group">
+                            <label for="type-cours">Type de cours *</label>
+                            <select id="type-cours" name="Type de cours" required>
+                                <option value="" disabled selected>Choisir...</option>
+                                <option value="Instrument">Instrument</option>
+                                <option value="Solfege seul">Solf&egrave;ge seul</option>
+                                <option value="Eveil musical (a partir de 3 ans)">&Eacute;veil musical (&agrave; partir de 3 ans)</option>
+                                <option value="Ensemble vocal / Chorale">Ensemble vocal / Chorale</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="instrument">Instrument souhait&eacute;</label>
+                            <select id="instrument" name="Instrument souhaite">
+                                <option value="" selected>&mdash; Si cours d'instrument &mdash;</option>
+                                <option>Piano</option>
+                                <option>Accord&eacute;on</option>
+                                <option>M&eacute;lodica</option>
+                                <option>Fl&ucirc;te &agrave; bec</option>
+                                <option>Fl&ucirc;te traversi&egrave;re</option>
+                                <option>Saxophone</option>
+                                <option>Clarinette</option>
+                                <option>Guitare classique</option>
+                                <option>Guitare &eacute;lectrique</option>
+                                <option>Basse &eacute;lectrique</option>
+                                <option>Violon</option>
+                                <option>Batterie</option>
+                                <option>Percussions</option>
+                                <option>Trompette</option>
+                                <option>Trombone</option>
+                                <option>Tuba</option>
+                                <option>Cor</option>
+                                <option>Saxhorn</option>
+                                <option>Autre (pr&eacute;ciser en remarque)</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="niveau">Niveau</label>
+                                <select id="niveau" name="Niveau">
+                                    <option value="Debutant" selected>D&eacute;butant</option>
+                                    <option value="A deja pratique">A d&eacute;j&agrave; pratiqu&eacute;</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="duree">Dur&eacute;e du cours souhait&eacute;e</label>
+                                <select id="duree" name="Duree du cours">
+                                    <option value="" disabled selected>Choisir...</option>
+                                    <option value="20 minutes">20 minutes</option>
+                                    <option value="30 minutes">30 minutes</option>
+                                    <option value="45 minutes">45 minutes</option>
+                                    <option value="Sans objet">Sans objet (solf&egrave;ge / &eacute;veil / vocal)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="paiement">Formule de paiement envisag&eacute;e</label>
+                            <select id="paiement" name="Formule de paiement">
+                                <option value="" disabled selected>Choisir...</option>
+                                <option value="Annuel">Annuel (1 fois)</option>
+                                <option value="Trimestriel">Trimestriel</option>
+                                <option value="Mensuel 10 mois">Mensuel sur 10 mois</option>
+                                <option value="Mensuel 12 mois">Mensuel sur 12 mois</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="famille">Personnes d&eacute;j&agrave; inscrites dans la famille</label>
+                            <select id="famille" name="Inscrits dans la famille">
+                                <option value="0 (premier inscrit)" selected>Aucune (1er inscrit)</option>
+                                <option value="1">1 personne d&eacute;j&agrave; inscrite</option>
+                                <option value="2">2 personnes d&eacute;j&agrave; inscrites</option>
+                                <option value="3 ou plus">3 personnes ou plus</option>
+                            </select>
+                            <p class="field-hint">Pour la cotisation d&eacute;gressive (30&euro; / 15&euro; / 10&euro; / gratuit &agrave; partir du 4e).</p>
+                        </div>
+                    </div>
+
+                    <!-- Remarques -->
+                    <div class="members-section">
+                        <h3><i class="fas fa-comment-dots"></i> Informations compl&eacute;mentaires</h3>
+                        <div class="form-group">
+                            <label for="connaissance">Comment avez-vous connu l'&eacute;cole&nbsp;?</label>
+                            <input type="text" id="connaissance" name="Comment connu l'ecole" placeholder="Bouche &agrave; oreille, concert, r&eacute;seaux sociaux...">
+                        </div>
+                        <div class="form-group">
+                            <label for="remarque">Remarque / question</label>
+                            <textarea id="remarque" name="Remarque" placeholder="Toute information utile (cours d'essai souhait&eacute;, disponibilit&eacute;s, instrument pr&eacute;cis...)"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Engagements -->
+                    <div class="members-section">
+                        <h3><i class="fas fa-file-signature"></i> Engagements</h3>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="reglement" name="Reglement interieur accepte" value="Oui" required>
+                            <label for="reglement">J'ai pris connaissance du <a href="ecole.html" target="_blank" style="color: var(--primary); text-decoration: underline;">r&egrave;glement int&eacute;rieur</a> de l'&eacute;cole de musique et je m'engage &agrave; le respecter. *</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="image" name="Droit a l'image autorise" value="Oui">
+                            <label for="image">J'autorise l'&eacute;cole &agrave; utiliser les photos/vid&eacute;os prises lors des cours et auditions (site, r&eacute;seaux sociaux, presse).</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i> Envoyer ma demande d'inscription
+                    </button>
+                    <p class="field-hint" style="text-align:center; margin-top:14px;">
+                        Cette pr&eacute;-inscription ne vaut pas inscription d&eacute;finitive. L'&eacute;cole vous recontactera pour finaliser.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-about">
+                    <div class="footer-logo"><img src="images/logo.png" alt="La Lyre Briarde" class="footer-logo-img"><span>La Lyre Briarde</span></div>
+                    <p>Harmonie municipale de Boissy-le-Ch&acirc;tel depuis 1881. Animation de la vie culturelle et musicale de notre commune.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="prestations.html">Nos Prestations</a></li>
+                        <li><a href="histoire.html">Notre Histoire</a></li>
+                        <li><a href="ecole.html">Notre &Eacute;cole</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel (77169)</li>
+                        <li><i class="fas fa-envelope"></i> contact@lalyrebriarde.fr</li>
+                        <li><i class="fas fa-phone"></i> 06 43 76 27 78</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>R&eacute;p&eacute;titions</h4>
+                    <p>Orchestre : Lundi 20h30-22h15<br>Marching : Jeudi 20h30-22h00<br>Fanfare : Jeudi 1x/mois</p>
+                    <p class="footer-highlight">Nouveaux musiciens bienvenus !</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 La Lyre Briarde. Tous droits r&eacute;serv&eacute;s.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        // Envoi AJAX du formulaire d'inscription via Netlify Forms
+        const inscForm = document.getElementById('inscriptionForm');
+        if (inscForm) {
+            inscForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (!inscForm.reportValidity()) return;
+
+                const btn = document.getElementById('submitBtn');
+                const original = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+                const formData = new FormData(inscForm);
+                const body = new URLSearchParams(formData).toString();
+
+                fetch('/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body
+                })
+                .then((res) => {
+                    if (!res.ok) throw new Error('Erreur réseau');
+                    document.getElementById('formIntro').style.display = 'none';
+                    inscForm.style.display = 'none';
+                    const ok = document.getElementById('formSuccess');
+                    ok.classList.add('show');
+                    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = original;
+                    alert("Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous contacter directement par mail.");
+                });
+            });
+        }
+    </script>
+</body>
+</html>
