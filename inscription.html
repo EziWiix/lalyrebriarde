@@ -92,12 +92,13 @@
                     Cette demande sera transmise &agrave; l'&eacute;cole, qui vous recontactera pour finaliser l'inscription.
                 </div>
 
-                <form class="contact-form inscription-form" id="inscriptionForm" name="inscription" method="POST"
-                      data-netlify="true" netlify-honeypot="bot-field">
-                    <input type="hidden" name="form-name" value="inscription">
-                    <p style="display:none;">
-                        <label>Ne pas remplir : <input name="bot-field"></label>
-                    </p>
+                <form class="contact-form inscription-form" id="inscriptionForm" method="POST">
+                    <!-- Web3Forms : remplacer la valeur ci-dessous par ta clé d'accès -->
+                    <input type="hidden" name="access_key" value="cf04f012-b9a6-4557-b62d-4017d762fc91">
+                    <input type="hidden" name="subject" value="Nouvelle inscription - École de musique Crescendo">
+                    <input type="hidden" name="from_name" value="Site La Lyre Briarde">
+                    <!-- Anti-spam honeypot (caché) -->
+                    <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
                     <!-- Élève -->
                     <div class="members-section">
@@ -322,7 +323,7 @@
     </footer>
     <script src="js/main.js"></script>
     <script>
-        // Envoi AJAX du formulaire d'inscription via Netlify Forms
+        // Envoi AJAX du formulaire d'inscription via Web3Forms
         const inscForm = document.getElementById('inscriptionForm');
         if (inscForm) {
             inscForm.addEventListener('submit', (e) => {
@@ -335,15 +336,15 @@
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
 
                 const formData = new FormData(inscForm);
-                const body = new URLSearchParams(formData).toString();
 
-                fetch('/', {
+                fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: body
+                    headers: { 'Accept': 'application/json' },
+                    body: formData
                 })
-                .then((res) => {
-                    if (!res.ok) throw new Error('Erreur réseau');
+                .then((res) => res.json())
+                .then((data) => {
+                    if (!data.success) throw new Error(data.message || 'Erreur');
                     document.getElementById('formIntro').style.display = 'none';
                     inscForm.style.display = 'none';
                     const ok = document.getElementById('formSuccess');
