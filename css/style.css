@@ -1990,6 +1990,9 @@ a, button, .btn, label, select, summary, .hamburger, .formation-tab,
     cursor: pointer;
 }
 
+/* Prochaines répétitions (espace membres) */
+.members-alert-line { display: inline-block; margin-top: 5px; }
+
 /* Boutons du hero (Écouter + Photos) */
 .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 

@@ -262,4 +262,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Espace membres : prochaines répétitions (calcul auto) ---
+    const nextReh = document.getElementById('nextRehearsals');
+    if (nextReh) {
+        const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+        function prochain(jourCible, heureFin) {
+            const now = new Date();
+            const d = new Date(); d.setHours(0, 0, 0, 0);
+            let ajout = (jourCible - d.getDay() + 7) % 7;
+            if (ajout === 0 && now.getHours() >= heureFin) ajout = 7; // répétition déjà passée aujourd'hui
+            d.setDate(d.getDate() + ajout);
+            return d;
+        }
+        function fmt(d) {
+            const aujourdhui = new Date(); aujourdhui.setHours(0, 0, 0, 0);
+            const demain = new Date(aujourdhui); demain.setDate(demain.getDate() + 1);
+            let prefix = '';
+            if (d.getTime() === aujourdhui.getTime()) prefix = "Aujourd'hui — ";
+            else if (d.getTime() === demain.getTime()) prefix = 'Demain — ';
+            return prefix + jours[d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear();
+        }
+        const repets = [
+            { nom: 'Orchestre', date: prochain(1, 22), horaire: '20h30 à 22h15' },
+            { nom: "Marching'Band", date: prochain(4, 22), horaire: '20h30 à 22h00' }
+        ];
+        repets.sort((a, b) => a.date - b.date);
+        nextReh.innerHTML = '<strong>Prochaines répétitions :</strong>' +
+            repets.map(r => '<br><span class="members-alert-line"><strong>' + r.nom + '</strong> — ' + fmt(r.date) + ' · ' + r.horaire + '</span>').join('') +
+            '<br><span class="members-alert-sub">Salle des fêtes de Boissy-le-Châtel</span>';
+    }
+
 });
