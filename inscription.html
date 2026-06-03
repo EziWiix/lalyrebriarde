@@ -14,17 +14,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Styles spécifiques fiche d'inscription */
-        .inscription-form .members-section { margin-bottom: 36px; }
+        .inscription-form .members-section { margin-bottom: 8px; }
         .inscription-form .members-section h3 {
             display: flex; align-items: center; gap: 10px;
-            font-size: 1.15rem; margin-bottom: 20px;
-            padding-bottom: 10px; border-bottom: 2px solid var(--gray-200);
+            font-size: 1.25rem; margin-bottom: 24px;
+            padding-bottom: 12px; border-bottom: 2px solid var(--gray-200);
         }
         .inscription-form .members-section h3 i { color: var(--gold); }
         .field-hint { font-size: 0.78rem; color: var(--gray-500); margin-top: 6px; font-weight: 400; }
         .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
         .checkbox-group input[type="checkbox"] {
-            width: auto; margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px;
+            margin-top: 3px; flex-shrink: 0; width: 18px; height: 18px;
             accent-color: var(--primary); cursor: pointer;
         }
         .checkbox-group label { margin-bottom: 0; font-weight: 400; cursor: pointer; line-height: 1.5; }
@@ -40,9 +40,28 @@
         .form-success.show { display: block; }
         .form-success i { font-size: 3.5rem; color: #27ae60; margin-bottom: 16px; }
         .form-success h3 { font-size: 1.5rem; margin-bottom: 12px; }
-        @media (max-width: 600px) {
-            .form-row-3 { grid-template-columns: 1fr !important; }
+
+        /* --- Multi-étapes --- */
+        .form-progress { margin-bottom: 30px; }
+        .form-progress-bar { height: 8px; background: var(--gray-200); border-radius: 999px; overflow: hidden; }
+        .form-progress-bar span { display: block; height: 100%; width: 0; background: var(--primary); border-radius: 999px; transition: width .35s ease; }
+        .form-progress-text { font-size: .82rem; font-weight: 600; color: var(--gray-600); margin-top: 10px; text-align: center; }
+        .form-step { display: none; }
+        .form-step.active { display: block; animation: stepIn .3s ease; }
+        @keyframes stepIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+        .form-nav { display: flex; gap: 12px; margin-top: 28px; }
+        .form-nav .btn { flex: 1; justify-content: center; }
+
+        /* Boutons radio "cartes" */
+        .radio-row { display: flex; gap: 14px; flex-wrap: wrap; }
+        .radio-opt {
+            display: flex; align-items: center; gap: 10px; font-weight: 500; cursor: pointer;
+            padding: 13px 20px; border: 1px solid var(--gray-300); border-radius: var(--radius);
+            flex: 1; min-width: 120px; transition: border-color .2s, background .2s;
         }
+        .radio-opt:hover { border-color: var(--primary); }
+        .radio-opt input { width: auto; accent-color: var(--primary); cursor: pointer; }
+        .radio-opt:has(input:checked) { border-color: var(--primary); background: rgba(123,30,45,0.05); }
     </style>
 </head>
 <body>
@@ -92,185 +111,465 @@
                     Cette demande sera transmise &agrave; l'&eacute;cole, qui vous recontactera pour finaliser l'inscription.
                 </div>
 
-                <form class="contact-form inscription-form" id="inscriptionForm" method="POST">
-                    <!-- Web3Forms : remplacer la valeur ci-dessous par ta clé d'accès -->
+                <form class="contact-form inscription-form" id="inscriptionForm" method="POST" novalidate>
+                    <!-- Web3Forms -->
                     <input type="hidden" name="access_key" value="cf04f012-b9a6-4557-b62d-4017d762fc91">
                     <input type="hidden" name="subject" value="Nouvelle inscription - École de musique Crescendo">
                     <input type="hidden" name="from_name" value="Site La Lyre Briarde">
-                    <!-- Anti-spam honeypot (caché) -->
                     <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
-                    <!-- Élève -->
-                    <div class="members-section">
-                        <h3><i class="fas fa-user-graduate"></i> L'&eacute;l&egrave;ve</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="eleve-nom">Nom *</label>
-                                <input type="text" id="eleve-nom" name="Eleve - Nom" required placeholder="Nom de l'&eacute;l&egrave;ve">
+                    <!-- Barre de progression -->
+                    <div class="form-progress">
+                        <div class="form-progress-bar"><span id="progressFill"></span></div>
+                        <p class="form-progress-text" id="progressText"></p>
+                    </div>
+
+                    <!-- ============ ÉTAPE 1 : IDENTITÉ ============ -->
+                    <div class="form-step active" data-title="Identit&eacute;">
+                        <div class="members-section">
+                            <h3><i class="fas fa-id-card"></i> Identit&eacute;</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="prenom">Pr&eacute;nom *</label>
+                                    <input type="text" id="prenom" name="Prenom" required placeholder="Pr&eacute;nom de l'&eacute;l&egrave;ve">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Nom *</label>
+                                    <input type="text" id="nom" name="Nom" required placeholder="Nom de l'&eacute;l&egrave;ve">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="naissance">Date de naissance *</label>
+                                    <input type="date" id="naissance" name="Date de naissance" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telephone">T&eacute;l&eacute;phone *</label>
+                                    <input type="tel" id="telephone" name="Telephone" required placeholder="06 00 00 00 00">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="eleve-prenom">Pr&eacute;nom *</label>
-                                <input type="text" id="eleve-prenom" name="Eleve - Prenom" required placeholder="Pr&eacute;nom de l'&eacute;l&egrave;ve">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="eleve-naissance">Date de naissance *</label>
-                                <input type="date" id="eleve-naissance" name="Eleve - Date de naissance" required>
+                                <label for="eleve-email">Adresse mail *</label>
+                                <input type="email" id="eleve-email" name="Adresse mail" required placeholder="votre@email.fr">
                             </div>
                             <div class="form-group">
-                                <label for="eleve-tel">T&eacute;l&eacute;phone</label>
-                                <input type="tel" id="eleve-tel" name="Eleve - Telephone" placeholder="06 00 00 00 00">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="eleve-email">Email *</label>
-                            <input type="email" id="eleve-email" name="Email de contact" required placeholder="votre@email.fr">
-                        </div>
-                        <div class="form-group">
-                            <label for="eleve-adresse">Adresse</label>
-                            <input type="text" id="eleve-adresse" name="Adresse" placeholder="N&deg; et nom de rue">
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="eleve-cp">Code postal</label>
-                                <input type="text" id="eleve-cp" name="Code postal" placeholder="77169">
+                                <label for="responsable">Responsable ou tuteur</label>
+                                <input type="text" id="responsable" name="Responsable ou tuteur" placeholder="Nom et pr&eacute;nom du responsable">
+                                <p class="field-hint">&Agrave; remplir si l'&eacute;l&egrave;ve est mineur.</p>
                             </div>
                             <div class="form-group">
-                                <label for="eleve-ville">Ville</label>
-                                <input type="text" id="eleve-ville" name="Ville" placeholder="Boissy-le-Ch&acirc;tel">
+                                <label for="adresse">Adresse postale *</label>
+                                <input type="text" id="adresse" name="Adresse postale" required placeholder="N&deg; et nom de rue">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cp">Code postal *</label>
+                                    <input type="text" id="cp" name="Code postal" required placeholder="77169">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ville">Ville *</label>
+                                    <input type="text" id="ville" name="Ville" required placeholder="Boissy-le-Ch&acirc;tel">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>L'&eacute;l&egrave;ve a-t-il des besoins sp&eacute;cifiques, n&eacute;cessite-t-il une attention particuli&egrave;re, est-il en situation de handicap&nbsp;? *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Besoins specifiques / handicap" value="Non" required> Non</label>
+                                    <label class="radio-opt"><input type="radio" name="Besoins specifiques / handicap" value="Oui"> Oui</label>
+                                </div>
+                            </div>
+                            <div class="form-group" id="handicapDetailsGroup" style="display:none;">
+                                <label for="handicap-details">Si oui, merci de pr&eacute;ciser (besoins, am&eacute;nagements souhait&eacute;s...)</label>
+                                <textarea id="handicap-details" name="Details besoins specifiques" placeholder="Ces informations restent confidentielles et nous aident &agrave; mieux accueillir l'&eacute;l&egrave;ve."></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Responsable légal -->
-                    <div class="members-section">
-                        <h3><i class="fas fa-user-shield"></i> Responsable l&eacute;gal</h3>
-                        <p class="field-hint" style="margin-top:-12px; margin-bottom:20px;">&Agrave; remplir si l'&eacute;l&egrave;ve est mineur.</p>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="resp-nom">Nom et pr&eacute;nom</label>
-                                <input type="text" id="resp-nom" name="Responsable - Nom et prenom" placeholder="Nom du parent / tuteur">
+                    <!-- ============ RÈGLEMENT INTÉRIEUR (page 3) ============ -->
+                    <div class="form-step" data-title="R&egrave;glement int&eacute;rieur">
+                        <div class="members-section">
+                            <h3><i class="fas fa-gavel"></i> R&egrave;glement int&eacute;rieur</h3>
+                            <p style="margin-bottom:20px; color:var(--gray-700);">Je reconnais avoir re&ccedil;u et pris connaissance du r&egrave;glement int&eacute;rieur de l'&Eacute;cole de musique de la Lyre Briarde et m'engage &agrave; le respecter et l'appliquer sous toutes ses formes.</p>
+
+                            <div style="max-height:320px; overflow-y:auto; border:1px solid var(--gray-200); border-radius:var(--radius); padding:18px 22px; margin-bottom:22px; background:var(--gray-100); font-size:0.82rem; line-height:1.6; color:var(--gray-700);">
+                                <p><strong>Article 1 &mdash; Cotisations.</strong> La formation musicale (solf&egrave;ge) &eacute;tant obligatoire, le total des cotisations solf&egrave;ge et instrument est d&ucirc; par chaque &eacute;l&egrave;ve &eacute;tudiant un instrument. Aucun &eacute;l&egrave;ve ne peut &ecirc;tre dispens&eacute; du paiement sous pr&eacute;texte qu'il a manqu&eacute; des cours. La d&eacute;mission n'entra&icirc;ne pas le remboursement de l'adh&eacute;sion annuelle.</p>
+                                <p><strong>Article 2 &mdash; R&egrave;glement des cours.</strong> &Agrave; effectuer le jour de l'inscription, en 10 ou 12 fois (virements ou ch&egrave;ques, d&eacute;bit le 5, 15 ou 25). Aucun remboursement en cas de d&eacute;part en cours d'ann&eacute;e, sauf cas grave, longue maladie ou mutation.</p>
+                                <p><strong>Article 3 &mdash; P&eacute;riode d'essai.</strong> Deux mois &agrave; la date d'inscription. L'engagement pour le reste de l'ann&eacute;e est concr&eacute;tis&eacute; par l'acquittement du solde restant d&ucirc;.</p>
+                                <p><strong>Article 4 &mdash; Assiduit&eacute;.</strong> Les &eacute;l&egrave;ves assistent r&eacute;guli&egrave;rement aux cours. En cas d'absence, pr&eacute;venir le professeur et envoyer un mail &agrave; vpcrescendo@lalyrebriarde.fr. Les cours ne sont pas publics.</p>
+                                <p><strong>Article 5 &mdash; Conduite.</strong> Chaque &eacute;l&egrave;ve doit t&eacute;moigner d'une conduite parfaite. Tout &eacute;cart pourra entra&icirc;ner le renvoi.</p>
+                                <p><strong>Article 6 &mdash; D&eacute;gradations.</strong> Toute d&eacute;gradation du mat&eacute;riel ou des locaux entra&icirc;ne des sanctions ; les responsables l&eacute;gaux s'acquittent des frais.</p>
+                                <p><strong>Article 7 &mdash; Responsables l&eacute;gaux.</strong> Ils am&egrave;nent les enfants &agrave; l'heure et les reprennent &agrave; l'issue des cours.</p>
+                                <p><strong>Article 8 &mdash; Responsabilit&eacute;.</strong> L'association n'est pas responsable des enfants en dehors des heures de cours et de ses locaux.</p>
+                                <p><strong>Article 9 &mdash; Musique d'ensemble.</strong> Activit&eacute; compl&eacute;mentaire et n&eacute;cessaire ; les &eacute;l&egrave;ves d'un niveau d&eacute;termin&eacute; participent aux ensembles de l'association.</p>
+                                <p><strong>Article 10 &mdash; Enseignement.</strong> Chaque professeur assure 34 cours par an, selon le programme &eacute;tabli. En cas d'absence, le cours est remplac&eacute; ult&eacute;rieurement.</p>
+                                <p style="margin-bottom:0;"><strong>Article 11 &mdash; Examens et progression.</strong> Le niveau est &eacute;valu&eacute; en fin d'ann&eacute;e par un examen annuel.</p>
                             </div>
-                            <div class="form-group">
-                                <label for="resp-lien">Lien de parent&eacute;</label>
-                                <input type="text" id="resp-lien" name="Responsable - Lien de parente" placeholder="P&egrave;re, m&egrave;re, tuteur...">
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="reglement" name="Reglement interieur" value="Reconnu et accepte" required>
+                                <label for="reglement">Je reconnais avoir re&ccedil;u et pris connaissance du r&egrave;glement int&eacute;rieur. *</label>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="resp-tel">T&eacute;l&eacute;phone du responsable</label>
-                            <input type="tel" id="resp-tel" name="Responsable - Telephone" placeholder="06 00 00 00 00">
                         </div>
                     </div>
 
-                    <!-- Formation souhaitée -->
-                    <div class="members-section">
-                        <h3><i class="fas fa-music"></i> Formation souhait&eacute;e</h3>
-                        <div class="form-group">
-                            <label for="type-cours">Type de cours *</label>
-                            <select id="type-cours" name="Type de cours" required>
-                                <option value="" disabled selected>Choisir...</option>
-                                <option value="Instrument">Instrument</option>
-                                <option value="Solfege seul">Solf&egrave;ge seul</option>
-                                <option value="Eveil musical (a partir de 3 ans)">&Eacute;veil musical (&agrave; partir de 3 ans)</option>
-                                <option value="Ensemble vocal / Chorale">Ensemble vocal / Chorale</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="instrument">Instrument souhait&eacute;</label>
-                            <select id="instrument" name="Instrument souhaite">
-                                <option value="" selected>&mdash; Si cours d'instrument &mdash;</option>
-                                <option>Piano</option>
-                                <option>Accord&eacute;on</option>
-                                <option>M&eacute;lodica</option>
-                                <option>Fl&ucirc;te &agrave; bec</option>
-                                <option>Fl&ucirc;te traversi&egrave;re</option>
-                                <option>Saxophone</option>
-                                <option>Clarinette</option>
-                                <option>Guitare classique</option>
-                                <option>Guitare &eacute;lectrique</option>
-                                <option>Basse &eacute;lectrique</option>
-                                <option>Violon</option>
-                                <option>Batterie</option>
-                                <option>Percussions</option>
-                                <option>Trompette</option>
-                                <option>Trombone</option>
-                                <option>Tuba</option>
-                                <option>Cor</option>
-                                <option>Saxhorn</option>
-                                <option>Autre (pr&eacute;ciser en remarque)</option>
-                            </select>
-                        </div>
-                        <div class="form-row">
+                    <!-- ============ INSCRIPTION & TARIFS (page 4) ============ -->
+                    <div class="form-step" data-title="Inscription &amp; tarifs">
+                        <div class="members-section">
+                            <h3><i class="fas fa-euro-sign"></i> Inscription &agrave; la Lyre Briarde</h3>
+                            <p class="field-hint" style="margin-top:-16px; margin-bottom:22px; font-size:0.9rem;">Inscription aux cours, solf&egrave;ge, ensemble vocal, orchestres.</p>
+
+                            <div class="form-note" style="margin-bottom:24px;">
+                                <strong>Tarifs 2025/2026</strong> &mdash; la grille compl&egrave;te (instruments, solf&egrave;ge, ensemble vocal, cotisation annuelle) est disponible sur la page de l'&eacute;cole.
+                                <br><a href="ecole.html" target="_blank" class="btn btn-outline" style="margin-top:14px;"><i class="fas fa-table"></i> Voir les tarifs</a>
+                            </div>
+
                             <div class="form-group">
-                                <label for="niveau">Niveau</label>
-                                <select id="niveau" name="Niveau">
-                                    <option value="Debutant" selected>D&eacute;butant</option>
-                                    <option value="A deja pratique">A d&eacute;j&agrave; pratiqu&eacute;</option>
+                                <label>Tarifs *</label>
+                                <div class="checkbox-group" style="margin-bottom:0;">
+                                    <input type="checkbox" id="tarifs-ok" name="Tarifs" value="Pris connaissance" required>
+                                    <label for="tarifs-ok">J'ai pris connaissance des tarifs de l'ann&eacute;e</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Inscription &agrave; l'&eacute;cole de musique CRESCENDO et &agrave; l'ensemble vocal *</label>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Type d'inscription" value="Oui (ecole de musique + ensemble vocal)" required> oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Type d'inscription" value="Non (acces direct aux orchestres)"> non (acc&egrave;s direct aux orchestres)</label>
+                                    <label class="radio-opt"><input type="radio" name="Type d'inscription" value="Benevole"> Je veux &ecirc;tre b&eacute;n&eacute;vole</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ SOLFÈGE (page 5) ============ -->
+                    <div class="form-step" data-title="Solf&egrave;ge">
+                        <div class="members-section">
+                            <h3><i class="fas fa-book-open"></i> Solf&egrave;ge</h3>
+                            <div class="form-group">
+                                <label>Le cours de formation musicale est obligatoire pour tous les &eacute;l&egrave;ves du cycle 1. *</label>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Solfege" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Solfege" value="Non"> Non</label>
+                                    <label class="radio-opt"><input type="radio" name="Solfege" value="Option Bac"> Option Bac</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ ÉTAPE : INSTRUMENT 1 (page 6) ============ -->
+                    <div class="form-step" data-title="Instrument 1">
+                        <div class="members-section">
+                            <h3><i class="fas fa-music"></i> Crescendo &mdash; Instrument 1</h3>
+                            <div class="form-group">
+                                <label for="instrument1">Instrument 1 *</label>
+                                <select id="instrument1" name="Instrument 1" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Piano (synth&eacute;, piano num&eacute;rique)</option>
+                                    <option>Accord&eacute;on</option>
+                                    <option>Solf&egrave;ge</option>
+                                    <option>Cuivres (Trompette, cornet, bugle, trombone, cor, euphonium, tuba)</option>
+                                    <option>Fl&ucirc;te traversi&egrave;re</option>
+                                    <option>Saxophone</option>
+                                    <option>Clarinette</option>
+                                    <option>Guitare (classique, &eacute;lectrique, basse)</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Ensemble Vocal</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="duree">Dur&eacute;e du cours souhait&eacute;e</label>
-                                <select id="duree" name="Duree du cours">
-                                    <option value="" disabled selected>Choisir...</option>
-                                    <option value="20 minutes">20 minutes</option>
-                                    <option value="30 minutes">30 minutes</option>
-                                    <option value="45 minutes">45 minutes</option>
-                                    <option value="Sans objet">Sans objet (solf&egrave;ge / &eacute;veil / vocal)</option>
+                                <label>Dur&eacute;e de cours 1 *</label>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 1" value="20 mn" required> 20 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 1" value="30 mn"> 30 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 1" value="45 mn"> 45 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 1" value="1h30 (uniquement l'ensemble vocal)"> 1h30 (uniquement l'ensemble vocal)</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Deuxi&egrave;me instrument&nbsp;? *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Deuxieme instrument" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Deuxieme instrument" value="Non"> Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ INSTRUMENT 2 (page 7) ============ -->
+                    <div class="form-step" data-title="Instrument 2">
+                        <div class="members-section">
+                            <h3><i class="fas fa-music"></i> Crescendo &mdash; Instrument 2</h3>
+                            <div class="form-group">
+                                <label for="instrument2">Instrument 2 *</label>
+                                <select id="instrument2" name="Instrument 2" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Piano (synth&eacute;, piano num&eacute;rique)</option>
+                                    <option>Accord&eacute;on</option>
+                                    <option>Solf&egrave;ge</option>
+                                    <option>Cuivres (Trompette, cornet, bugle, trombone, cor, euphonium, tuba)</option>
+                                    <option>Fl&ucirc;te traversi&egrave;re</option>
+                                    <option>Saxophone</option>
+                                    <option>Clarinette</option>
+                                    <option>Guitare (classique, &eacute;lectrique, basse)</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Ensemble Vocal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Dur&eacute;e de cours 2 *</label>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 2" value="20 mn" required> 20 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 2" value="30 mn"> 30 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 2" value="45 mn"> 45 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 2" value="1h30 (uniquement l'ensemble vocal)"> 1h30 (uniquement l'ensemble vocal)</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Troisi&egrave;me instrument&nbsp;?</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Troisieme instrument" value="Oui"> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Troisieme instrument" value="Non"> Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ INSTRUMENT 3 (page 8) ============ -->
+                    <div class="form-step" data-title="Instrument 3">
+                        <div class="members-section">
+                            <h3><i class="fas fa-music"></i> Crescendo &mdash; Instrument 3</h3>
+                            <div class="form-group">
+                                <label for="instrument3">Instrument 3 *</label>
+                                <select id="instrument3" name="Instrument 3" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Piano (synth&eacute;, piano num&eacute;rique)</option>
+                                    <option>Accord&eacute;on</option>
+                                    <option>Solf&egrave;ge</option>
+                                    <option>Cuivres (Trompette, cornet, bugle, trombone, cor, euphonium, tuba)</option>
+                                    <option>Fl&ucirc;te traversi&egrave;re</option>
+                                    <option>Saxophone</option>
+                                    <option>Clarinette</option>
+                                    <option>Guitare (classique, &eacute;lectrique, basse)</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Ensemble Vocal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Dur&eacute;e de cours 3 *</label>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 3" value="20 mn" required> 20 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 3" value="30 mn"> 30 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 3" value="45 mn"> 45 mn</label>
+                                    <label class="radio-opt"><input type="radio" name="Duree de cours 3" value="1h30 (uniquement l'ensemble vocal)"> 1h30 (uniquement l'ensemble vocal)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ PARTICIPATION AUX ORCHESTRES (page 9) ============ -->
+                    <div class="form-step" data-title="Participation aux orchestres">
+                        <div class="members-section">
+                            <h3><i class="fas fa-users"></i> Participation aux orchestres</h3>
+                            <div class="form-group">
+                                <label>Participation &agrave; un orchestre&nbsp;? *</label>
+                                <p class="field-hint" style="margin-top:0; margin-bottom:12px; font-size:0.85rem;">Vous avez la possibilit&eacute; de participer au Marching'band, &agrave; la Fanfare, au Fil'harmonie Orchestra.</p>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Participation a un orchestre" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Participation a un orchestre" value="Non"> Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ MARCHING'BAND (page 10) ============ -->
+                    <div class="form-step" data-title="Marching'Band">
+                        <div class="members-section">
+                            <h3><i class="fas fa-drum"></i> Marching'Band</h3>
+                            <div class="form-group">
+                                <label>Marching'Band *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Marching'Band" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Marching'Band" value="Non"> Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ INSTRUMENT MARCHING'BAND (page 11) ============ -->
+                    <div class="form-step" data-title="Instrument Marching'Band">
+                        <div class="members-section">
+                            <h3><i class="fas fa-drum"></i> Instrument Marching'Band</h3>
+                            <p class="field-hint" style="margin-top:-12px; margin-bottom:20px; font-size:0.85rem;">Fanfare festive &mdash; r&eacute;p&eacute;tition les jeudis.</p>
+                            <div class="form-group">
+                                <label for="instrument-marching">Instrument Marching'Band *</label>
+                                <select id="instrument-marching" name="Instrument Marching'Band" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Fl&ucirc;te</option>
+                                    <option>M&eacute;lodica</option>
+                                    <option>Clarinette</option>
+                                    <option>Saxophone</option>
+                                    <option>Cuivre</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Autre</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="paiement">Formule de paiement envisag&eacute;e</label>
-                            <select id="paiement" name="Formule de paiement">
-                                <option value="" disabled selected>Choisir...</option>
-                                <option value="Annuel">Annuel (1 fois)</option>
-                                <option value="Trimestriel">Trimestriel</option>
-                                <option value="Mensuel 10 mois">Mensuel sur 10 mois</option>
-                                <option value="Mensuel 12 mois">Mensuel sur 12 mois</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="famille">Personnes d&eacute;j&agrave; inscrites dans la famille</label>
-                            <select id="famille" name="Inscrits dans la famille">
-                                <option value="0 (premier inscrit)" selected>Aucune (1er inscrit)</option>
-                                <option value="1">1 personne d&eacute;j&agrave; inscrite</option>
-                                <option value="2">2 personnes d&eacute;j&agrave; inscrites</option>
-                                <option value="3 ou plus">3 personnes ou plus</option>
-                            </select>
-                            <p class="field-hint">Pour la cotisation d&eacute;gressive (30&euro; / 15&euro; / 10&euro; / gratuit &agrave; partir du 4e).</p>
+                    </div>
+
+                    <!-- ============ FANFARE (page 12) ============ -->
+                    <div class="form-step" data-title="Fanfare">
+                        <div class="members-section">
+                            <h3><i class="fas fa-trumpet"></i> Fanfare</h3>
+                            <p class="field-hint" style="margin-top:-12px; margin-bottom:20px; font-size:0.85rem;">Pour les c&eacute;r&eacute;monies patriotiques &mdash; r&eacute;p&eacute;titions 1 jeudi par mois.</p>
+                            <div class="form-group">
+                                <label>Fanfare *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Fanfare" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Fanfare" value="Non"> Non</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Remarques -->
-                    <div class="members-section">
-                        <h3><i class="fas fa-comment-dots"></i> Informations compl&eacute;mentaires</h3>
-                        <div class="form-group">
-                            <label for="connaissance">Comment avez-vous connu l'&eacute;cole&nbsp;?</label>
-                            <input type="text" id="connaissance" name="Comment connu l'ecole" placeholder="Bouche &agrave; oreille, concert, r&eacute;seaux sociaux...">
-                        </div>
-                        <div class="form-group">
-                            <label for="remarque">Remarque / question</label>
-                            <textarea id="remarque" name="Remarque" placeholder="Toute information utile (cours d'essai souhait&eacute;, disponibilit&eacute;s, instrument pr&eacute;cis...)"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Engagements -->
-                    <div class="members-section">
-                        <h3><i class="fas fa-file-signature"></i> Engagements</h3>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="reglement" name="Reglement interieur accepte" value="Oui" required>
-                            <label for="reglement">J'ai pris connaissance du <a href="ecole.html" target="_blank" style="color: var(--primary); text-decoration: underline;">r&egrave;glement int&eacute;rieur</a> de l'&eacute;cole de musique et je m'engage &agrave; le respecter. *</label>
-                        </div>
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="image" name="Droit a l'image autorise" value="Oui">
-                            <label for="image">J'autorise l'&eacute;cole &agrave; utiliser les photos/vid&eacute;os prises lors des cours et auditions (site, r&eacute;seaux sociaux, presse).</label>
+                    <!-- ============ INSTRUMENT FANFARE (page 13) ============ -->
+                    <div class="form-step" data-title="Instrument Fanfare">
+                        <div class="members-section">
+                            <h3><i class="fas fa-trumpet"></i> Instrument Fanfare</h3>
+                            <div class="form-group">
+                                <label for="instrument-fanfare">Instrument Fanfare *</label>
+                                <select id="instrument-fanfare" name="Instrument Fanfare" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Fl&ucirc;te</option>
+                                    <option>M&eacute;lodica</option>
+                                    <option>Clarinette</option>
+                                    <option>Saxophone</option>
+                                    <option>Cuivres</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%; justify-content: center;">
-                        <i class="fas fa-paper-plane"></i> Envoyer ma demande d'inscription
-                    </button>
+                    <!-- ============ FIL'HARMONIE ORCHESTRA (page 14) ============ -->
+                    <div class="form-step" data-title="Fil'Harmonie Orchestra">
+                        <div class="members-section">
+                            <h3><i class="fas fa-music"></i> Fil'Harmonie Orchestra</h3>
+                            <p class="field-hint" style="margin-top:-12px; margin-bottom:20px; font-size:0.85rem;">Orchestre d'harmonie &mdash; r&eacute;p&eacute;tition les lundis.</p>
+                            <div class="form-group">
+                                <label>FHO *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Fil'Harmonie Orchestra (FHO)" value="Oui" required> Oui</label>
+                                    <label class="radio-opt"><input type="radio" name="Fil'Harmonie Orchestra (FHO)" value="Non"> Non</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ INSTRUMENT FHO (page 15) ============ -->
+                    <div class="form-step" data-title="Instrument FHO">
+                        <div class="members-section">
+                            <h3><i class="fas fa-music"></i> Instrument Fil'Harmonie Orchestra</h3>
+                            <div class="form-group">
+                                <label for="instrument-fho">Instrument FHO *</label>
+                                <select id="instrument-fho" name="Instrument FHO" required>
+                                    <option value="" disabled selected>S&eacute;lectionner...</option>
+                                    <option>Fl&ucirc;te</option>
+                                    <option>Clarinette</option>
+                                    <option>Saxophone</option>
+                                    <option>Accord&eacute;on</option>
+                                    <option>Piano (synth&eacute;, piano num&eacute;rique)</option>
+                                    <option>Cuivres</option>
+                                    <option>Guitare (classique, &eacute;lectrique, basse)</option>
+                                    <option>Batterie, percussion</option>
+                                    <option>Autre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ ADHÉSION (page 16) ============ -->
+                    <div class="form-step" data-title="Adh&eacute;sion">
+                        <div class="members-section">
+                            <h3><i class="fas fa-hand-holding-heart"></i> Adh&eacute;sion</h3>
+                            <div class="form-group">
+                                <label>Adh&eacute;sion Crescendo / Ensemble Vocal / Orchestre *</label>
+                                <p class="field-hint" style="margin-top:0; margin-bottom:12px; font-size:0.85rem;">Le r&egrave;glement de l'adh&eacute;sion doit &ecirc;tre distinct du r&egrave;glement des cours.</p>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="30 €" required> 30 &euro;</label>
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="15 € (2e inscrit de la famille)"> 15 &euro; (tarif pour le deuxi&egrave;me inscrit de la famille)</label>
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="10 € (3e inscrit de la famille)"> 10 &euro; (pour le 3&egrave;me inscrit de la famille)</label>
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="Gratuit (suivants)"> Gratuit (pour les suivants)</label>
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="Orchestre uniquement : 15 €"> Orchestre uniquement : 15 &euro;</label>
+                                    <label class="radio-opt"><input type="radio" name="Adhesion" value="Bénévole : 15 €"> B&eacute;n&eacute;vole : 15 &euro;</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>R&egrave;glement des cours de musique / ensemble vocal et adh&eacute;sion par *</label>
+                                <p class="field-hint" style="margin-top:0; margin-bottom:12px; font-size:0.85rem;">L'adh&eacute;sion doit &ecirc;tre distincte du r&egrave;glement des cours.</p>
+                                <div class="radio-row" style="flex-direction:column;">
+                                    <label class="radio-opt"><input type="radio" name="Mode de reglement" value="Espèce" required> Esp&egrave;ce</label>
+                                    <label class="radio-opt"><input type="radio" name="Mode de reglement" value="Chèque"> Ch&egrave;que</label>
+                                    <label class="radio-opt"><input type="radio" name="Mode de reglement" value="Les deux"> Les deux</label>
+                                    <label class="radio-opt"><input type="radio" name="Mode de reglement" value="Virement bancaire (sous réserve)"> Virement bancaire (sous r&eacute;serve)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ CHÈQUE (page 17) ============ -->
+                    <div class="form-step" data-title="Ch&egrave;que">
+                        <div class="members-section">
+                            <h3><i class="fas fa-money-check"></i> Ch&egrave;que</h3>
+                            <p class="field-hint" style="margin-top:-12px; margin-bottom:20px; font-size:0.85rem;">Merci de bien vouloir noter au crayon papier au dos des ch&egrave;ques la date &agrave; partir de laquelle la Lyre pourra d&eacute;poser le ch&egrave;que &agrave; la banque.</p>
+                            <div class="form-group">
+                                <label>Nombre de ch&egrave;ques *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Nombre de cheques" value="1" required> 1</label>
+                                    <label class="radio-opt"><input type="radio" name="Nombre de cheques" value="3"> 3</label>
+                                    <label class="radio-opt"><input type="radio" name="Nombre de cheques" value="10"> 10</label>
+                                    <label class="radio-opt"><input type="radio" name="Nombre de cheques" value="12"> 12</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ DROIT À L'IMAGE (page 18) ============ -->
+                    <div class="form-step" data-title="Droit &agrave; l'image">
+                        <div class="members-section">
+                            <h3><i class="fas fa-camera"></i> Droit &agrave; l'image</h3>
+                            <p class="field-hint" style="margin-top:-12px; margin-bottom:20px; font-size:0.85rem;">Autoriser LA LYRE BRIARDE &agrave; utiliser les images me repr&eacute;sentant pour tout support de communication servant &agrave; la promotion de l'association.</p>
+                            <div class="form-group">
+                                <label>Droit &agrave; l'image *</label>
+                                <div class="radio-row">
+                                    <label class="radio-opt"><input type="radio" name="Droit a l'image" value="Autorise" required> autorise</label>
+                                    <label class="radio-opt"><input type="radio" name="Droit a l'image" value="N'autorise pas"> n'autorise pas</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============ INFORMATIONS COMPLÉMENTAIRES (page 19) ============ -->
+                    <div class="form-step" data-title="Informations compl&eacute;mentaires">
+                        <div class="members-section">
+                            <h3><i class="fas fa-comment-dots"></i> Informations compl&eacute;mentaires</h3>
+                            <div class="form-group">
+                                <label for="infos">Informations compl&eacute;mentaires *</label>
+                                <p class="field-hint" style="margin-top:0; margin-bottom:12px; font-size:0.85rem;">Allergie, intol&eacute;rances, permis, possibilit&eacute; covoiturage, merci de noter &eacute;galement la r&eacute;f&eacute;rence et la marque des instruments dont vous vous servez pour les orchestres.</p>
+                                <textarea id="infos" name="Informations complementaires" required placeholder="Votre r&eacute;ponse"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Les étapes suivantes seront ajoutées ici -->
+
+                    <!-- Navigation -->
+                    <div class="form-nav">
+                        <button type="button" class="btn btn-outline" id="prevBtn"><i class="fas fa-arrow-left"></i> Pr&eacute;c&eacute;dent</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">Suivant <i class="fas fa-arrow-right"></i></button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Envoyer ma demande</button>
+                    </div>
                     <p class="field-hint" style="text-align:center; margin-top:14px;">
                         Cette pr&eacute;-inscription ne vaut pas inscription d&eacute;finitive. L'&eacute;cole vous recontactera pour finaliser.
                     </p>
@@ -323,20 +622,123 @@
     </footer>
     <script src="js/main.js"></script>
     <script>
-        // Envoi AJAX du formulaire d'inscription via Web3Forms
         const inscForm = document.getElementById('inscriptionForm');
         if (inscForm) {
+            const steps = [...inscForm.querySelectorAll('.form-step')];
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const fill = document.getElementById('progressFill');
+            const ptext = document.getElementById('progressText');
+
+            // Les étapes sont en ordre des pages du Google Form : page 2 .. page 19.
+            const FIRST = 2;                       // 1re étape = page 2 (la page 1 "email" est zappée)
+            const LAST = FIRST + steps.length - 1;  // = 19
+            const idxOf = p => p - FIRST;           // n° de page -> index d'étape
+            const stepOf = p => steps[idxOf(p)];
+
+            // Valeur d'un champ (radios -> valeur cochée, select -> valeur choisie)
+            const val = name => { const e = inscForm.elements[name]; return e ? (e.value || '') : ''; };
+
+            // --- Carte des embranchements ---
+            // Pour une page donnée, renvoie le n° de la page suivante (sinon page+1).
+            const branch = {
+                4: () => { const v = val("Type d'inscription");
+                    if (v.indexOf('Oui') === 0) return 5;
+                    if (v.indexOf('Non') === 0) return 9;
+                    if (v === 'Benevole') return 16;
+                    return 5; },
+                6:  () => val('Deuxieme instrument') === 'Non' ? 9 : 7,
+                7:  () => val('Troisieme instrument') === 'Non' ? 9 : 8,
+                9:  () => val('Participation a un orchestre') === 'Non' ? 16 : 10,
+                10: () => val("Marching'Band") === 'Non' ? 12 : 11,
+                12: () => val('Fanfare') === 'Non' ? 14 : 13,
+                14: () => val("Fil'Harmonie Orchestra (FHO)") === 'Non' ? 16 : 15,
+                16: () => { const m = val('Mode de reglement'); return (m === 'Chèque' || m === 'Les deux') ? 17 : 18; }
+            };
+            const nextPage = p => (branch[p] ? branch[p]() : p + 1);
+
+            let currentPage = FIRST;
+            const history = [];   // pages visitées AVANT la page courante
+
+            function show(p) {
+                currentPage = p;
+                const i = idxOf(p);
+                steps.forEach((s, k) => s.classList.toggle('active', k === i));
+                const isLast = (p === LAST);
+                prevBtn.style.display = history.length ? 'inline-flex' : 'none';
+                nextBtn.style.display = isLast ? 'none' : 'inline-flex';
+                submitBtn.style.display = isLast ? 'inline-flex' : 'none';
+                fill.style.width = Math.round(((p - FIRST) / (LAST - FIRST)) * 100) + '%';
+                ptext.textContent = 'Étape ' + (history.length + 1) +
+                    (steps[i].dataset.title ? ' — ' + steps[i].dataset.title : '');
+                const top = inscForm.getBoundingClientRect().top + window.scrollY - 110;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+
+            // Valide les champs visibles d'une étape
+            function validate(p) {
+                const fields = stepOf(p).querySelectorAll('input, select, textarea');
+                for (const f of fields) {
+                    if (!f.disabled && !f.checkValidity()) { f.reportValidity(); return false; }
+                }
+                return true;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (!validate(currentPage)) return;
+                const np = nextPage(currentPage);
+                history.push(currentPage);
+                show(np);
+            });
+            prevBtn.addEventListener('click', () => {
+                if (history.length) show(history.pop());
+            });
+
+            // Affichage conditionnel du détail handicap
+            inscForm.querySelectorAll('input[name="Besoins specifiques / handicap"]').forEach(r => {
+                r.addEventListener('change', () => {
+                    const grp = document.getElementById('handicapDetailsGroup');
+                    if (grp) grp.style.display = (val('Besoins specifiques / handicap') === 'Oui') ? 'block' : 'none';
+                });
+            });
+
+            show(FIRST);
+
+            // --- Envoi via Web3Forms ---
             inscForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                if (!inscForm.reportValidity()) return;
+                const path = history.concat(currentPage);        // pages réellement parcourues
+                const pathIdx = new Set(path.map(idxOf));
 
-                const btn = document.getElementById('submitBtn');
-                const original = btn.innerHTML;
-                btn.disabled = true;
-                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+                // Désactive les champs des pages SAUTÉES (exclus de l'envoi + de la validation)
+                steps.forEach((s, k) => {
+                    const inside = pathIdx.has(k);
+                    s.querySelectorAll('input, select, textarea').forEach(f => { f.disabled = !inside; });
+                });
 
-                const formData = new FormData(inscForm);
-                // Reply-to : répondre au mail va directement au candidat
+                // Valide les pages du parcours ; revient sur la 1re en erreur
+                for (const p of path) {
+                    const fields = stepOf(p).querySelectorAll('input, select, textarea');
+                    for (const f of fields) {
+                        if (!f.disabled && !f.checkValidity()) {
+                            // reconstruit l'historique jusqu'à cette page
+                            const pos = path.indexOf(p);
+                            history.length = 0;
+                            for (let k = 0; k < pos; k++) history.push(path[k]);
+                            show(p);
+                            setTimeout(() => f.reportValidity(), 350);
+                            reEnableAll();
+                            return;
+                        }
+                    }
+                }
+
+                const original = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+                const formData = new FormData(inscForm);   // n'inclut pas les champs disabled
                 const emailVal = inscForm.querySelector('#eleve-email');
                 if (emailVal && emailVal.value) formData.set('replyto', emailVal.value);
 
@@ -355,11 +757,16 @@
                     ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 })
                 .catch(() => {
-                    btn.disabled = false;
-                    btn.innerHTML = original;
+                    reEnableAll();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = original;
                     alert("Une erreur est survenue lors de l'envoi. Merci de réessayer, ou de nous contacter directement par mail.");
                 });
             });
+
+            function reEnableAll() {
+                steps.forEach(s => s.querySelectorAll('input, select, textarea').forEach(f => { f.disabled = false; }));
+            }
         }
     </script>
 </body>
