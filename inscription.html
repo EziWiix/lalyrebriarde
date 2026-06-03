@@ -336,6 +336,9 @@
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
 
                 const formData = new FormData(inscForm);
+                // Reply-to : répondre au mail va directement au candidat
+                const emailVal = inscForm.querySelector('#eleve-email');
+                if (emailVal && emailVal.value) formData.set('replyto', emailVal.value);
 
                 fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
