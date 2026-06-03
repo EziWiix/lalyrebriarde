@@ -62,6 +62,17 @@
         .radio-opt:hover { border-color: var(--primary); }
         .radio-opt input { width: auto; accent-color: var(--primary); cursor: pointer; }
         .radio-opt:has(input:checked) { border-color: var(--primary); background: rgba(123,30,45,0.05); }
+
+        /* Grille tarifaire intégrée */
+        .tarifs-box { border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 20px 18px; background: var(--gray-100); }
+        .tarifs-cat { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; margin: 18px 0 8px; color: var(--dark); }
+        .tarifs-cat:first-of-type { margin-top: 0; }
+        .tarifs-cat i { color: var(--gold); }
+        .tarifs-table { font-size: 0.8rem; }
+        .tarifs-table th, .tarifs-table td { padding: 8px 10px; white-space: nowrap; }
+        .cotisation-box { margin-top: 18px; padding: 14px 16px; background: var(--white); border-radius: var(--radius); border-left: 3px solid var(--gold); font-size: 0.85rem; }
+        .cotisation-box ul { margin: 8px 0 0; padding-left: 18px; }
+        .cotisation-box li { margin-bottom: 3px; }
     </style>
 </head>
 <body>
@@ -218,9 +229,50 @@
                             <h3><i class="fas fa-euro-sign"></i> Inscription &agrave; la Lyre Briarde</h3>
                             <p class="field-hint" style="margin-top:-16px; margin-bottom:22px; font-size:0.9rem;">Inscription aux cours, solf&egrave;ge, ensemble vocal, orchestres.</p>
 
-                            <div class="form-note" style="margin-bottom:24px;">
-                                <strong>Tarifs 2025/2026</strong> &mdash; la grille compl&egrave;te (instruments, solf&egrave;ge, ensemble vocal, cotisation annuelle) est disponible sur la page de l'&eacute;cole.
-                                <br><a href="ecole.html" target="_blank" class="btn btn-outline" style="margin-top:14px;"><i class="fas fa-table"></i> Voir les tarifs</a>
+                            <div class="tarifs-box" style="margin-bottom:26px;">
+                                <p style="text-align:center; font-weight:700; font-size:1.05rem; margin-bottom:16px; color:var(--primary);">Tarifs 2025 / 2026</p>
+
+                                <h4 class="tarifs-cat"><i class="fas fa-trumpet"></i> Instruments</h4>
+                                <div class="members-table-wrapper">
+                                    <table class="members-table tarifs-table">
+                                        <thead><tr><th>Dur&eacute;e</th><th>Annuel</th><th>Trimestriel</th><th>Mensuel 10 mois</th><th>Mensuel 12 mois</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>20 min</td><td><strong>515,00 &euro;</strong></td><td>171,67 &euro;</td><td>51,50 &euro;</td><td>42,92 &euro;</td></tr>
+                                            <tr><td>30 min</td><td><strong>705,60 &euro;</strong></td><td>235,20 &euro;</td><td>70,56 &euro;</td><td>58,80 &euro;</td></tr>
+                                            <tr><td>45 min</td><td><strong>896,10 &euro;</strong></td><td>298,70 &euro;</td><td>89,61 &euro;</td><td>74,67 &euro;</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h4 class="tarifs-cat"><i class="fas fa-book-open"></i> Solf&egrave;ge</h4>
+                                <div class="members-table-wrapper">
+                                    <table class="members-table tarifs-table">
+                                        <thead><tr><th>Dur&eacute;e</th><th>Annuel</th><th>Trimestriel</th><th>Mensuel 10 mois</th><th>Mensuel 12 mois</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>45 min</td><td><strong>252,35 &euro;</strong></td><td>84,12 &euro;</td><td>25,23 &euro;</td><td>21,03 &euro;</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <h4 class="tarifs-cat"><i class="fas fa-microphone-alt"></i> Ensemble Vocal</h4>
+                                <div class="members-table-wrapper">
+                                    <table class="members-table tarifs-table">
+                                        <thead><tr><th>Dur&eacute;e</th><th>Annuel</th><th>Trimestriel</th><th>Mensuel 10 mois</th><th>Mensuel 12 mois</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>1h30</td><td><strong>160,00 &euro;</strong></td><td>53,34 &euro;</td><td>16,00 &euro;</td><td>13,34 &euro;</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="cotisation-box">
+                                    <strong><i class="fas fa-hand-holding-heart" style="color:var(--gold);"></i> Cotisation annuelle</strong>
+                                    <ul>
+                                        <li>30,00 &euro; &mdash; 1er inscrit</li>
+                                        <li>15,00 &euro; &mdash; 2&egrave;me inscrit d'une m&ecirc;me famille</li>
+                                        <li>10,00 &euro; &mdash; 3&egrave;me inscrit</li>
+                                        <li>Gratuit &mdash; &agrave; partir du 4&egrave;me</li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div class="form-group">
