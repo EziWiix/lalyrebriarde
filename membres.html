@@ -88,7 +88,7 @@
 
             <!-- Onglets formations -->
             <div class="formations-tabs">
-                <button class="formation-tab active" data-tab="annonces"><i class="fas fa-bullhorn"></i> Annonces</button>
+                <button class="formation-tab active" data-tab="annonces"><i class="fas fa-calendar-alt"></i> Planning</button>
                 <button class="formation-tab" data-tab="orchestre"><i class="fas fa-music"></i> Orchestre</button>
                 <button class="formation-tab" data-tab="marching"><i class="fas fa-person-walking"></i> Marching</button>
                 <button class="formation-tab" data-tab="fanfare"><i class="fas fa-landmark"></i> Fanfare</button>
@@ -96,28 +96,6 @@
 
             <!-- === TAB ANNONCES === -->
             <div class="formation-content active" id="tab-annonces">
-
-            <!-- Annonces -->
-            <div class="members-section">
-                <h3><i class="fas fa-bullhorn"></i> Annonces</h3>
-                <div class="members-cards">
-                    <div class="members-card">
-                        <span class="members-card-date">27 Mars 2026</span>
-                        <h4>Concert de Printemps</h4>
-                        <p>Le concert de printemps aura lieu le <strong>samedi 12 avril &agrave; 20h30</strong>. R&eacute;p&eacute;tition g&eacute;n&eacute;rale le vendredi 11 avril. Pr&eacute;sence obligatoire.</p>
-                    </div>
-                    <div class="members-card">
-                        <span class="members-card-date">20 Mars 2026</span>
-                        <h4>Nouvelles partitions</h4>
-                        <p>De nouvelles partitions ont &eacute;t&eacute; distribu&eacute;es. Pensez &agrave; les travailler avant la prochaine r&eacute;p&eacute;tition.</p>
-                    </div>
-                    <div class="members-card">
-                        <span class="members-card-date">15 Mars 2026</span>
-                        <h4>Cotisations</h4>
-                        <p>Rappel : les cotisations annuelles sont &agrave; r&eacute;gler avant fin mars. Voir le tr&eacute;sorier.</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- Planning -->
             <div class="members-section">
@@ -132,37 +110,20 @@
                                 <th>Heure</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>28/03/2026</td>
-                                <td>R&eacute;p&eacute;tition</td>
-                                <td>Salle des f&ecirc;tes</td>
-                                <td>20h30</td>
-                            </tr>
-                            <tr>
-                                <td>04/04/2026</td>
-                                <td>R&eacute;p&eacute;tition</td>
-                                <td>Salle des f&ecirc;tes</td>
-                                <td>20h30</td>
-                            </tr>
-                            <tr>
-                                <td>11/04/2026</td>
-                                <td>R&eacute;p&eacute;tition g&eacute;n&eacute;rale</td>
-                                <td>Salle des f&ecirc;tes</td>
-                                <td>20h00</td>
-                            </tr>
-                            <tr class="members-table-highlight">
-                                <td>12/04/2026</td>
-                                <td><strong>Concert de Printemps</strong></td>
-                                <td>Salle des f&ecirc;tes</td>
-                                <td>20h30</td>
-                            </tr>
-                            <tr>
-                                <td>08/05/2026</td>
-                                <td>Comm&eacute;moration 8 mai</td>
-                                <td>Monument aux morts</td>
-                                <td>10h30</td>
-                            </tr>
+                        <tbody id="planningBody">
+                            <tr data-date="2026-06-21"><td>21/06/2026</td><td>F&ecirc;te de la Musique</td><td>Boissy-le-Ch&acirc;tel</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-07-04"><td>04/07/2026</td><td>Marching'Band</td><td>Sammeron</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-07-12"><td>12/07/2026</td><td>Marching'Band</td><td>Charly-sur-Marne</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-07-13"><td>13/07/2026</td><td>Marching'Band</td><td>Boissy-le-Ch&acirc;tel</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-07-14"><td>14/07/2026</td><td>Marching'Band</td><td>La Fert&eacute;-sous-Jouarre</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-07-14"><td>14/07/2026</td><td>Fanfare</td><td>La Fert&eacute;-sous-Jouarre / Chailly-en-Brie / Boissy-le-Ch&acirc;tel</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-08-30"><td>30/08/2026</td><td>Marching'Band</td><td>Montbrieux</td><td>&mdash;</td></tr>
+                            <tr data-date="2026-09-18"><td>18/09/2026</td><td>Marching'Band</td><td>Croissy-Beaubourg</td><td>&mdash;</td></tr>
+                            <tr class="members-table-highlight" data-date="2026-11-08"><td>08/11/2026</td><td><strong>Concert CMF</strong></td><td>Beaumont-sur-Oise</td><td>&mdash;</td></tr>
+                            <tr class="members-table-highlight" data-date="2026-11-21"><td>21/11/2026</td><td><strong>Concert Sainte-C&eacute;cile</strong></td><td>Saint-Jean-les-Deux-Jumeaux</td><td>&mdash;</td></tr>
+                            <tr class="members-table-highlight" data-date="2026-11-28"><td>28/11/2026</td><td><strong>Concert Sainte-C&eacute;cile</strong></td><td>Boissy-le-Ch&acirc;tel</td><td>&mdash;</td></tr>
+                            <tr class="members-table-highlight" data-date="2027-01-17"><td>17/01/2027</td><td><strong>Concert du Jour de l'An</strong></td><td>Sucrerie de Coulommiers</td><td>&mdash;</td></tr>
+                            <tr class="members-table-highlight" data-date="2027-03-28"><td>28/03/2027</td><td><strong>Concert Caritatif</strong></td><td>Brie-Comte-Robert</td><td>&mdash;</td></tr>
                         </tbody>
                     </table>
                 </div>

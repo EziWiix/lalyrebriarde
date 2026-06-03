@@ -293,4 +293,14 @@ document.addEventListener('DOMContentLoaded', () => {
             '<br><span class="members-alert-sub">Salle des fêtes de Boissy-le-Châtel</span>';
     }
 
+    // --- Planning membres : masque les dates passées ---
+    const planningBody = document.getElementById('planningBody');
+    if (planningBody) {
+        const today = new Date(); today.setHours(0, 0, 0, 0);
+        planningBody.querySelectorAll('tr[data-date]').forEach((tr) => {
+            const d = new Date(tr.dataset.date + 'T00:00:00');
+            if (!isNaN(d.getTime()) && d < today) tr.remove();
+        });
+    }
+
 });
