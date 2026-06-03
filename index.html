@@ -197,50 +197,85 @@
     <section class="section section-news" id="actualites">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Restez inform&eacute;s</span>
-                <h2 class="section-title">Actualit&eacute;s</h2>
+                <span class="section-tag">Agenda</span>
+                <h2 class="section-title">Nos dates de sortie</h2>
                 <div class="section-divider"></div>
             </div>
-            <div class="news-grid">
-                <article class="news-card">
-                    <div class="news-image">
-                        <div class="image-placeholder small">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <span class="news-date">15 Mars 2026</span>
-                    </div>
-                    <div class="news-body">
-                        <h3>Concert de Printemps</h3>
-                        <p>Retrouvez-nous le 22 mars pour notre traditionnel concert de printemps &agrave; la salle des f&ecirc;tes.</p>
-                        <a href="#" class="link-arrow">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <div class="news-image">
-                        <div class="image-placeholder small">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <span class="news-date">2 F&eacute;vrier 2026</span>
-                    </div>
-                    <div class="news-body">
-                        <h3>Inscriptions &Eacute;cole de Musique</h3>
-                        <p>Les inscriptions pour la nouvelle saison sont ouvertes ! D&eacute;butants et confirm&eacute;s bienvenus.</p>
-                        <a href="ecole.html" class="link-arrow">En savoir plus <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                <article class="news-card">
-                    <div class="news-image">
-                        <div class="image-placeholder small">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <span class="news-date">20 D&eacute;cembre 2025</span>
-                    </div>
-                    <div class="news-body">
-                        <h3>March&eacute; de No&euml;l</h3>
-                        <p>Merci &agrave; tous pour cette belle soir&eacute;e au march&eacute; de No&euml;l ! Retour en images bient&ocirc;t.</p>
-                        <a href="#" class="link-arrow">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+            <div id="datesContainer">
+                <!-- HARMONIE -->
+                <div class="dates-section">
+                    <h3 class="dates-cat"><i class="fas fa-music"></i> Harmonie</h3>
+                    <ul class="dates-list">
+                        <li class="date-item" data-date="2026-06-21">
+                            <div class="date-badge"><span class="date-day">21</span><span class="date-month">Juin</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4>F&ecirc;te de la Musique</h4><p><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel</p></div>
+                        </li>
+                        <li class="date-item" data-date="2026-11-08">
+                            <div class="date-badge"><span class="date-day">08</span><span class="date-month">Nov.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4>Concert CMF</h4><p><i class="fas fa-map-marker-alt"></i> Beaumont-sur-Oise</p></div>
+                        </li>
+                        <li class="date-item" data-date="2026-11-21">
+                            <div class="date-badge"><span class="date-day">21</span><span class="date-month">Nov.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4>Concert Sainte-C&eacute;cile</h4><p><i class="fas fa-map-marker-alt"></i> Saint-Jean-les-Deux-Jumeaux</p></div>
+                        </li>
+                        <li class="date-item" data-date="2026-11-28">
+                            <div class="date-badge"><span class="date-day">28</span><span class="date-month">Nov.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4>Concert Sainte-C&eacute;cile</h4><p><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel</p></div>
+                        </li>
+                        <li class="date-item" data-date="2027-01-17">
+                            <div class="date-badge"><span class="date-day">17</span><span class="date-month">Janv.</span><span class="date-year">2027</span></div>
+                            <div class="date-info"><h4>Concert du Jour de l'An</h4><p><i class="fas fa-map-marker-alt"></i> Sucrerie de Coulommiers</p></div>
+                        </li>
+                        <li class="date-item" data-date="2027-03-28">
+                            <div class="date-badge"><span class="date-day">28</span><span class="date-month">Mars</span><span class="date-year">2027</span></div>
+                            <div class="date-info"><h4>Concert Caritatif</h4><p><i class="fas fa-map-marker-alt"></i> Brie-Comte-Robert</p></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- MARCHING BAND -->
+                <div class="dates-section">
+                    <h3 class="dates-cat"><i class="fas fa-drum"></i> Marching Band</h3>
+                    <ul class="dates-list">
+                        <li class="date-item" data-date="2026-07-04">
+                            <div class="date-badge"><span class="date-day">04</span><span class="date-month">Juil.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> Sammeron</h4></div>
+                        </li>
+                        <li class="date-item" data-date="2026-07-12">
+                            <div class="date-badge"><span class="date-day">12</span><span class="date-month">Juil.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> Charly-sur-Marne</h4></div>
+                        </li>
+                        <li class="date-item" data-date="2026-07-13">
+                            <div class="date-badge"><span class="date-day">13</span><span class="date-month">Juil.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> Boissy-le-Ch&acirc;tel</h4></div>
+                        </li>
+                        <li class="date-item" data-date="2026-07-14">
+                            <div class="date-badge"><span class="date-day">14</span><span class="date-month">Juil.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> La Fert&eacute;-sous-Jouarre</h4></div>
+                        </li>
+                        <li class="date-item" data-date="2026-08-30">
+                            <div class="date-badge"><span class="date-day">30</span><span class="date-month">Ao&ucirc;t</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> Montbrieux</h4></div>
+                        </li>
+                        <li class="date-item" data-date="2026-09-18">
+                            <div class="date-badge"><span class="date-day">18</span><span class="date-month">Sept.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4><i class="fas fa-map-marker-alt"></i> Croissy-Beaubourg</h4></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- FANFARE -->
+                <div class="dates-section">
+                    <h3 class="dates-cat"><i class="fas fa-trumpet"></i> Fanfare</h3>
+                    <ul class="dates-list">
+                        <li class="date-item" data-date="2026-07-14">
+                            <div class="date-badge"><span class="date-day">14</span><span class="date-month">Juil.</span><span class="date-year">2026</span></div>
+                            <div class="date-info"><h4>D&eacute;fil&eacute; du 14 Juillet</h4><p><i class="fas fa-map-marker-alt"></i> La Fert&eacute;-sous-Jouarre / Chailly-en-Brie / Boissy-le-Ch&acirc;tel</p></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <p class="dates-empty" id="datesEmpty" style="display:none;">Aucune date &agrave; venir pour le moment. Revenez bient&ocirc;t&nbsp;!</p>
             </div>
         </div>
     </section>

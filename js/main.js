@@ -211,4 +211,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Agenda : masque les dates passées, trie, cache les sections vides ---
+    const datesContainer = document.getElementById('datesContainer');
+    if (datesContainer) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        let totalVisible = 0;
+        datesContainer.querySelectorAll('.dates-section').forEach((section) => {
+            const list = section.querySelector('.dates-list');
+            // Retire les dates passées
+            section.querySelectorAll('.date-item').forEach((it) => {
+                const d = new Date(it.dataset.date + 'T00:00:00');
+                if (isNaN(d.getTime()) || d < today) it.remove();
+            });
+            // Trie les restantes par date croissante
+            const remaining = [...section.querySelectorAll('.date-item')];
+            remaining.sort((a, b) => a.dataset.date.localeCompare(b.dataset.date));
+            remaining.forEach((it) => list.appendChild(it));
+            if (remaining.length === 0) section.style.display = 'none';
+            totalVisible += remaining.length;
+        });
+        const empty = document.getElementById('datesEmpty');
+        if (empty) empty.style.display = totalVisible === 0 ? 'block' : 'none';
+    }
+
 });
