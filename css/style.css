@@ -1912,3 +1912,15 @@ img {
         padding: 24px;
     }
 }
+
+/* Curseur : flèche normale sur les textes (pas le curseur "écriture" I-beam).
+   Le curseur texte reste uniquement sur les vrais champs de saisie. */
+body { cursor: default; }
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"],
+input[type="password"], input[type="search"], input[type="number"], textarea {
+    cursor: text;
+}
+a, button, .btn, label, select, summary, .hamburger, .formation-tab,
+[role="button"], input[type="radio"], input[type="checkbox"], input[type="range"] {
+    cursor: pointer;
+}
