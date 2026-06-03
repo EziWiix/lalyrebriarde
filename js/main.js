@@ -235,4 +235,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (empty) empty.style.display = totalVisible === 0 ? 'block' : 'none';
     }
 
+    // --- Galerie : visionneuse (lightbox) ---
+    const galleryGrid = document.getElementById('galleryGrid');
+    const lightbox = document.getElementById('lightbox');
+    if (galleryGrid && lightbox) {
+        const imgs = [...galleryGrid.querySelectorAll('img')];
+        const lbImg = document.getElementById('lbImg');
+        let idx = 0;
+        function openLb(i) {
+            idx = (i + imgs.length) % imgs.length;
+            lbImg.src = imgs[idx].src;
+            lbImg.alt = imgs[idx].alt;
+            lightbox.classList.add('open');
+        }
+        function closeLb() { lightbox.classList.remove('open'); }
+        imgs.forEach((im, i) => im.addEventListener('click', () => openLb(i)));
+        document.getElementById('lbClose').addEventListener('click', closeLb);
+        document.getElementById('lbPrev').addEventListener('click', () => openLb(idx - 1));
+        document.getElementById('lbNext').addEventListener('click', () => openLb(idx + 1));
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLb(); });
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+            else if (e.key === 'ArrowLeft') openLb(idx - 1);
+            else if (e.key === 'ArrowRight') openLb(idx + 1);
+        });
+    }
+
 });
