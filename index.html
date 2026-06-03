@@ -98,13 +98,19 @@
                             <i class="fas fa-music"></i>
                         </div>
                         <div class="player-details">
-                            <span class="player-title" id="trackTitle">La danse des magiciens</span>
+                            <span class="player-title" id="trackTitle">The Witch and the Saint</span>
                             <span class="player-artist">La Lyre Briarde</span>
                         </div>
                     </div>
                     <div class="player-controls">
+                        <button class="player-btn player-btn-sm" id="prevTrack" aria-label="Pr&eacute;c&eacute;dent">
+                            <i class="fas fa-backward-step"></i>
+                        </button>
                         <button class="player-btn" id="playBtn" aria-label="Lecture">
                             <i class="fas fa-play" id="playIcon"></i>
+                        </button>
+                        <button class="player-btn player-btn-sm" id="nextTrack" aria-label="Suivant">
+                            <i class="fas fa-forward-step"></i>
                         </button>
                         <div class="player-progress-wrapper">
                             <div class="player-progress" id="progressBar">
@@ -120,9 +126,8 @@
                             <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.8">
                         </div>
                     </div>
-                    <audio id="audioPlayer" preload="metadata">
-                        <source src="audio/musique.mp3" type="audio/mpeg">
-                    </audio>
+                    <audio id="audioPlayer" preload="metadata"></audio>
+                    <ul class="player-playlist" id="playlist"></ul>
                 </div>
             </div>
         </div>

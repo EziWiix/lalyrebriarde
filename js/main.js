@@ -82,72 +82,93 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Audio Player ---
+    // --- Audio Player (playlist) ---
     const audio = document.getElementById('audioPlayer');
     const playBtn = document.getElementById('playBtn');
     const playIcon = document.getElementById('playIcon');
+    const prevBtn = document.getElementById('prevTrack');
+    const nextBtn = document.getElementById('nextTrack');
     const progressBar = document.getElementById('progressBar');
     const progressFill = document.getElementById('progressFill');
     const currentTimeEl = document.getElementById('currentTime');
     const totalTimeEl = document.getElementById('totalTime');
     const volumeSlider = document.getElementById('volumeSlider');
     const volumeIcon = document.getElementById('volumeIcon');
+    const trackTitle = document.getElementById('trackTitle');
+    const playlistEl = document.getElementById('playlist');
 
-    if (audio && playBtn) {
-        // Set initial volume
+    const tracks = [
+        { title: 'The Witch and the Saint', src: 'audio/the-witch-and-the-saint.mp3' },
+        { title: "Dans les yeux d'Émilie", src: 'audio/dans-les-yeux-demilie.mp3' },
+        { title: 'France Gall', src: 'audio/france-gall.mp3' },
+        { title: 'Forrest Gump', src: 'audio/forrest-gump.mp3' },
+        { title: 'A Klezmer Karnival', src: 'audio/a-klezmer-karnival.mp3' }
+    ];
+
+    if (audio && playBtn && playlistEl) {
+        let current = 0;
         audio.volume = 0.8;
 
-        // Play/Pause
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playIcon.className = 'fas fa-pause';
-            } else {
-                audio.pause();
-                playIcon.className = 'fas fa-play';
-            }
-        });
-
-        // Format time
         function formatTime(s) {
             const m = Math.floor(s / 60);
             const sec = Math.floor(s % 60);
             return m + ':' + (sec < 10 ? '0' : '') + sec;
         }
 
-        // Update progress
+        // Construit la playlist
+        tracks.forEach((t, i) => {
+            const li = document.createElement('li');
+            li.className = 'player-track';
+            li.innerHTML = '<span class="track-num">' + (i + 1) + '</span>' +
+                '<span class="track-name">' + t.title + '</span>' +
+                '<i class="fas fa-volume-high track-eq"></i>';
+            li.addEventListener('click', () => { loadTrack(i, true); });
+            playlistEl.appendChild(li);
+        });
+        const trackEls = [...playlistEl.children];
+
+        function loadTrack(i, autoplay) {
+            current = (i + tracks.length) % tracks.length;
+            audio.src = tracks[current].src;
+            trackTitle.textContent = tracks[current].title;
+            trackEls.forEach((el, k) => el.classList.toggle('active', k === current));
+            progressFill.style.width = '0%';
+            currentTimeEl.textContent = '0:00';
+            totalTimeEl.textContent = '0:00';
+            if (autoplay) audio.play();
+        }
+
+        // Init sur la 1re piste (sans lecture auto)
+        loadTrack(0, false);
+
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
+        });
+        audio.addEventListener('play', () => { playIcon.className = 'fas fa-pause'; });
+        audio.addEventListener('pause', () => { playIcon.className = 'fas fa-play'; });
+
+        prevBtn.addEventListener('click', () => loadTrack(current - 1, true));
+        nextBtn.addEventListener('click', () => loadTrack(current + 1, true));
+
         audio.addEventListener('timeupdate', () => {
             if (audio.duration) {
-                const pct = (audio.currentTime / audio.duration) * 100;
-                progressFill.style.width = pct + '%';
+                progressFill.style.width = (audio.currentTime / audio.duration) * 100 + '%';
                 currentTimeEl.textContent = formatTime(audio.currentTime);
             }
         });
-
-        // Duration loaded
         audio.addEventListener('loadedmetadata', () => {
             totalTimeEl.textContent = formatTime(audio.duration);
         });
-
-        // Click on progress bar to seek
         progressBar.addEventListener('click', (e) => {
             const rect = progressBar.getBoundingClientRect();
-            const pct = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = pct * audio.duration;
+            if (audio.duration) audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
         });
-
-        // Volume
         volumeSlider.addEventListener('input', () => {
             audio.volume = volumeSlider.value;
             volumeIcon.className = audio.volume == 0 ? 'fas fa-volume-mute' : 'fas fa-volume-up';
         });
-
-        // Reset on end
-        audio.addEventListener('ended', () => {
-            playIcon.className = 'fas fa-play';
-            progressFill.style.width = '0%';
-            currentTimeEl.textContent = '0:00';
-        });
+        // Piste suivante automatique en fin de morceau
+        audio.addEventListener('ended', () => loadTrack(current + 1, true));
     }
 
     // --- Contact form handler (envoi via Web3Forms) ---
