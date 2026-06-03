@@ -1990,6 +1990,9 @@ a, button, .btn, label, select, summary, .hamburger, .formation-tab,
     cursor: pointer;
 }
 
+/* Boutons du hero (Écouter + Photos) */
+.hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
 /* Dates de sortie (agenda) */
 .dates-section { margin-bottom: 44px; }
 .dates-section:last-of-type { margin-bottom: 0; }
