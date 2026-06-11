@@ -367,7 +367,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         html += '<div class="partition-item"><span class="partition-status ' + status + '"></span>';
                         html += '<span class="partition-name">' + esc(name) + (note ? ' <span class="partition-note">(' + esc(note) + ')</span>' : '') + '</span>';
                         html += '<div class="partition-links">';
-                        if (!cfg.nolink && lien) html += '<a href="' + lien.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link pdf"><i class="fas fa-file-pdf"></i> Partition</a>';
+                        if (!cfg.nolink && lien) {
+                            const liens = lien.split(/\s+/).filter(Boolean);
+                            liens.forEach((l, k) => {
+                                html += '<a href="' + l.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link pdf"><i class="fas fa-file-pdf"></i> Partition' + (liens.length > 1 ? ' ' + (k + 1) : '') + '</a>';
+                            });
+                        }
                         if (!cfg.nolink && yt) html += '<a href="' + yt.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link youtube"><i class="fab fa-youtube"></i> Vidéo</a>';
                         html += '</div></div>';
                     });
