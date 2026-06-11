@@ -1998,6 +1998,9 @@ a, button, .btn, label, select, summary, .hamburger, .formation-tab,
 
 /* Note de partition (incomplet, modifications...) */
 .partition-note { font-size: 0.8rem; color: var(--gray-500); font-style: italic; font-weight: 400; }
+/* Bouton lien vidéo YouTube d'une partition */
+.partition-link.youtube { color: #c4302b; }
+.partition-link.youtube:hover { color: #a02018; }
 
 /* Nos professeurs */
 .profs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }

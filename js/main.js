@@ -303,14 +303,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Espace membres : partitions Marching (depuis Google Sheets) ---
-    const partMarching = document.getElementById('partitionsMarching');
-    if (partMarching) {
-        const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?output=csv';
+    // --- Espace membres : partitions dynamiques (Google Sheets) ---
+    (function () {
         const SECTIONS = {
             'Cartonnier': { icon: 'fa-star', label: "Répertoire Marching'Band", badge: true },
             'En attente': { icon: 'fa-bookmark', label: 'À garder en attente de classement' },
-            'À retirer': { icon: 'fa-trash-alt', label: 'À supprimer des cartonniers', supprimer: true, nolink: true }
+            'À retirer': { icon: 'fa-trash-alt', label: 'À supprimer des cartonniers', supprimer: true, nolink: true },
+            'Sonneries': { icon: 'fa-bell', label: 'Sonneries' },
+            'Hymnes': { icon: 'fa-flag', label: 'Hymnes' },
+            'Marches': { icon: 'fa-person-walking', label: 'Marches' },
+            'En cours': { icon: 'fa-hourglass-half', label: "En cours d'apprentissage" }
         };
         function parseCSV(text) {
             const rows = []; let row = [], field = '', q = false;
@@ -330,46 +332,54 @@ document.addEventListener('DOMContentLoaded', () => {
             return rows;
         }
         const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        fetch(SHEET_CSV).then((r) => r.text()).then((text) => {
-            const rows = parseCSV(text.replace(/^﻿/, '').trim());
-            const head = rows.shift().map((h) => h.trim());
-            const ix = (n) => head.indexOf(n);
-            const iSec = ix('Section'), iNum = ix('N°'), iTit = ix('Titre'), iDisp = ix('Disponible'), iLien = ix('Lien'), iNote = ix('Note');
-            const groups = {}, order = [];
-            rows.forEach((r) => {
-                const sec = (r[iSec] || '').trim();
-                if (!sec || !(r[iTit] || '').trim()) return;
-                if (!groups[sec]) { groups[sec] = []; order.push(sec); }
-                groups[sec].push(r);
-            });
-            let html = '';
-            order.forEach((sec) => {
-                const cfg = SECTIONS[sec] || { icon: 'fa-music', label: sec };
-                const items = groups[sec];
-                html += '<div class="partitions-programme">';
-                html += '<h4 class="partitions-titre' + (cfg.supprimer ? ' supprimer' : '') + '"><i class="fas ' + cfg.icon + '"></i> ' + esc(cfg.label);
-                if (cfg.badge) html += ' <span class="partitions-badge">' + items.length + ' morceaux</span>';
-                html += '</h4><div class="partitions-list">';
-                items.forEach((r) => {
-                    const num = (r[iNum] || '').trim();
-                    const tit = (r[iTit] || '').trim();
-                    const disp = (r[iDisp] || '').trim().toLowerCase();
-                    const lien = (r[iLien] || '').trim();
-                    const note = (r[iNote] || '').trim();
-                    const status = (disp === 'non') ? 'wip' : 'ready';
-                    const name = (num ? num + ' - ' : '') + tit;
-                    html += '<div class="partition-item"><span class="partition-status ' + status + '"></span>';
-                    html += '<span class="partition-name">' + esc(name) + (note ? ' <span class="partition-note">(' + esc(note) + ')</span>' : '') + '</span>';
-                    html += '<div class="partition-links">';
-                    if (!cfg.nolink && lien) html += '<a href="' + lien.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link pdf"><i class="fas fa-file-pdf"></i> Partition</a>';
+        function loadPartitions(containerId, url) {
+            const el = document.getElementById(containerId);
+            if (!el) return;
+            fetch(url).then((r) => r.text()).then((text) => {
+                const rows = parseCSV(text.replace(/^﻿/, '').trim());
+                const head = rows.shift().map((h) => h.trim());
+                const ix = (n) => head.indexOf(n);
+                const iSec = ix('Section'), iNum = ix('N°'), iTit = ix('Titre'), iDisp = ix('Disponible'), iLien = ix('Lien'), iYt = ix('YouTube'), iNote = ix('Note');
+                const groups = {}, order = [];
+                rows.forEach((r) => {
+                    const sec = (r[iSec] || '').trim();
+                    if (!sec || !(r[iTit] || '').trim()) return;
+                    if (!groups[sec]) { groups[sec] = []; order.push(sec); }
+                    groups[sec].push(r);
+                });
+                let html = '';
+                order.forEach((sec) => {
+                    const cfg = SECTIONS[sec] || { icon: 'fa-music', label: sec };
+                    const items = groups[sec];
+                    html += '<div class="partitions-programme">';
+                    html += '<h4 class="partitions-titre' + (cfg.supprimer ? ' supprimer' : '') + '"><i class="fas ' + cfg.icon + '"></i> ' + esc(cfg.label);
+                    if (cfg.badge) html += ' <span class="partitions-badge">' + items.length + ' morceaux</span>';
+                    html += '</h4><div class="partitions-list">';
+                    items.forEach((r) => {
+                        const num = (r[iNum] || '').trim();
+                        const tit = (r[iTit] || '').trim();
+                        const disp = (r[iDisp] || '').trim().toLowerCase();
+                        const lien = (r[iLien] || '').trim();
+                        const yt = iYt >= 0 ? (r[iYt] || '').trim() : '';
+                        const note = (r[iNote] || '').trim();
+                        const status = (disp === 'non') ? 'wip' : 'ready';
+                        const name = (num ? num + ' - ' : '') + tit;
+                        html += '<div class="partition-item"><span class="partition-status ' + status + '"></span>';
+                        html += '<span class="partition-name">' + esc(name) + (note ? ' <span class="partition-note">(' + esc(note) + ')</span>' : '') + '</span>';
+                        html += '<div class="partition-links">';
+                        if (!cfg.nolink && lien) html += '<a href="' + lien.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link pdf"><i class="fas fa-file-pdf"></i> Partition</a>';
+                        if (!cfg.nolink && yt) html += '<a href="' + yt.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link youtube"><i class="fab fa-youtube"></i> Vidéo</a>';
+                        html += '</div></div>';
+                    });
                     html += '</div></div>';
                 });
-                html += '</div></div>';
+                el.innerHTML = html || '<p style="color:#888;">Aucune partition pour le moment.</p>';
+            }).catch(() => {
+                el.innerHTML = '<p style="color:#888;">Impossible de charger les partitions pour le moment. Réessayez plus tard.</p>';
             });
-            partMarching.innerHTML = html || '<p style="color:#888;">Aucune partition pour le moment.</p>';
-        }).catch(() => {
-            partMarching.innerHTML = '<p style="color:#888;">Impossible de charger les partitions pour le moment. Réessayez plus tard.</p>';
-        });
-    }
+        }
+        loadPartitions('partitionsMarching', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?output=csv');
+        loadPartitions('partitionsFanfare', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?gid=604426218&single=true&output=csv');
+    })();
 
 });
