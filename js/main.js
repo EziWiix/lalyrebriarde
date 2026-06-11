@@ -303,4 +303,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Espace membres : partitions Marching (depuis Google Sheets) ---
+    const partMarching = document.getElementById('partitionsMarching');
+    if (partMarching) {
+        const SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?output=csv';
+        const SECTIONS = {
+            'Cartonnier': { icon: 'fa-star', label: "Répertoire Marching'Band", badge: true },
+            'En attente': { icon: 'fa-bookmark', label: 'À garder en attente de classement' },
+            'À retirer': { icon: 'fa-trash-alt', label: 'À supprimer des cartonniers', supprimer: true, nolink: true }
+        };
+        function parseCSV(text) {
+            const rows = []; let row = [], field = '', q = false;
+            for (let i = 0; i < text.length; i++) {
+                const c = text[i];
+                if (q) {
+                    if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else q = false; }
+                    else field += c;
+                } else {
+                    if (c === '"') q = true;
+                    else if (c === ',') { row.push(field); field = ''; }
+                    else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+                    else if (c !== '\r') field += c;
+                }
+            }
+            if (field.length || row.length) { row.push(field); rows.push(row); }
+            return rows;
+        }
+        const esc = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        fetch(SHEET_CSV).then((r) => r.text()).then((text) => {
+            const rows = parseCSV(text.replace(/^﻿/, '').trim());
+            const head = rows.shift().map((h) => h.trim());
+            const ix = (n) => head.indexOf(n);
+            const iSec = ix('Section'), iNum = ix('N°'), iTit = ix('Titre'), iDisp = ix('Disponible'), iLien = ix('Lien'), iNote = ix('Note');
+            const groups = {}, order = [];
+            rows.forEach((r) => {
+                const sec = (r[iSec] || '').trim();
+                if (!sec || !(r[iTit] || '').trim()) return;
+                if (!groups[sec]) { groups[sec] = []; order.push(sec); }
+                groups[sec].push(r);
+            });
+            let html = '';
+            order.forEach((sec) => {
+                const cfg = SECTIONS[sec] || { icon: 'fa-music', label: sec };
+                const items = groups[sec];
+                html += '<div class="partitions-programme">';
+                html += '<h4 class="partitions-titre' + (cfg.supprimer ? ' supprimer' : '') + '"><i class="fas ' + cfg.icon + '"></i> ' + esc(cfg.label);
+                if (cfg.badge) html += ' <span class="partitions-badge">' + items.length + ' morceaux</span>';
+                html += '</h4><div class="partitions-list">';
+                items.forEach((r) => {
+                    const num = (r[iNum] || '').trim();
+                    const tit = (r[iTit] || '').trim();
+                    const disp = (r[iDisp] || '').trim().toLowerCase();
+                    const lien = (r[iLien] || '').trim();
+                    const note = (r[iNote] || '').trim();
+                    const status = (disp === 'non') ? 'wip' : 'ready';
+                    const name = (num ? num + ' - ' : '') + tit;
+                    html += '<div class="partition-item"><span class="partition-status ' + status + '"></span>';
+                    html += '<span class="partition-name">' + esc(name) + (note ? ' <span class="partition-note">(' + esc(note) + ')</span>' : '') + '</span>';
+                    html += '<div class="partition-links">';
+                    if (!cfg.nolink && lien) html += '<a href="' + lien.replace(/"/g, '%22') + '" target="_blank" rel="noopener" class="partition-link pdf"><i class="fas fa-file-pdf"></i> Partition</a>';
+                    html += '</div></div>';
+                });
+                html += '</div></div>';
+            });
+            partMarching.innerHTML = html || '<p style="color:#888;">Aucune partition pour le moment.</p>';
+        }).catch(() => {
+            partMarching.innerHTML = '<p style="color:#888;">Impossible de charger les partitions pour le moment. Réessayez plus tard.</p>';
+        });
+    }
+
 });

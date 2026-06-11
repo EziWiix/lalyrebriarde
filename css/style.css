@@ -1996,6 +1996,9 @@ a, button, .btn, label, select, summary, .hamburger, .formation-tab,
 /* Boutons du hero (Écouter + Photos) */
 .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+/* Note de partition (incomplet, modifications...) */
+.partition-note { font-size: 0.8rem; color: var(--gray-500); font-style: italic; font-weight: 400; }
+
 /* Nos professeurs */
 .profs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .prof-card {
