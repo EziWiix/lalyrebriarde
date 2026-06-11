@@ -312,7 +312,9 @@ document.addEventListener('DOMContentLoaded', () => {
             'Sonneries': { icon: 'fa-bell', label: 'Sonneries' },
             'Hymnes': { icon: 'fa-flag', label: 'Hymnes' },
             'Marches': { icon: 'fa-person-walking', label: 'Marches' },
-            'En cours': { icon: 'fa-hourglass-half', label: "En cours d'apprentissage" }
+            'En cours': { icon: 'fa-hourglass-half', label: "En cours d'apprentissage" },
+            'À garder': { icon: 'fa-bookmark', label: 'À garder' },
+            'À supprimer': { icon: 'fa-trash-alt', label: 'À supprimer (à remettre à Ricardo)', supprimer: true }
         };
         function parseCSV(text) {
             const rows = []; let row = [], field = '', q = false;
@@ -385,6 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         loadPartitions('partitionsMarching', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?output=csv');
         loadPartitions('partitionsFanfare', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?gid=995643220&single=true&output=csv');
+        loadPartitions('partitionsOrchestre', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?gid=1811564376&single=true&output=csv');
     })();
 
 });
