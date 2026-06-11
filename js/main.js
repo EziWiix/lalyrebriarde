@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         loadPartitions('partitionsMarching', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?output=csv');
-        loadPartitions('partitionsFanfare', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?gid=604426218&single=true&output=csv');
+        loadPartitions('partitionsFanfare', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR2tCW0Tnz0UiuzynCrIoX82OA1Kfz7m4hKhxspOeoS4JM2qnuXs_cvASUs4Ayx9laYAhEJPO_jeYIC/pub?gid=995643220&single=true&output=csv');
     })();
 
 });
