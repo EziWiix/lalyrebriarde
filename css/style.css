@@ -1996,6 +1996,27 @@ a, button, .btn, label, select, summary, .hamburger, .formation-tab,
 /* Boutons du hero (Écouter + Photos) */
 .hero-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
+/* Nos professeurs */
+.profs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.prof-card {
+    background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
+    padding: 28px 24px; text-align: center; box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.prof-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.prof-photo {
+    width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto 18px;
+    background: var(--gray-100); display: flex; align-items: center; justify-content: center;
+    border: 3px solid var(--gold);
+}
+.prof-photo img { width: 100%; height: 100%; object-fit: cover; }
+.prof-photo.placeholder i { font-size: 2.6rem; color: var(--gray-300); }
+.prof-card h4 { font-size: 1.15rem; margin: 0 0 4px; color: var(--dark); }
+.prof-role { display: inline-block; color: var(--primary); font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; }
+.prof-card p { font-size: 0.9rem; color: var(--gray-600); margin: 0; line-height: 1.6; }
+@media (max-width: 768px) { .profs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .profs-grid { grid-template-columns: 1fr; } }
+
 /* Dates de sortie (agenda) */
 .dates-section { margin-bottom: 44px; }
 .dates-section:last-of-type { margin-bottom: 0; }
