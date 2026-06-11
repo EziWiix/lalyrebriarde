@@ -72,12 +72,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Active nav link based on current page ---
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    // --- Active nav link based on current page (robuste avec ou sans .html) ---
+    function normPage(p) {
+        p = (p || '').split('/').pop().replace(/\.html$/, '');
+        return (p === '' || p === 'index') ? 'home' : p;
+    }
+    const currentNorm = normPage(window.location.pathname);
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+        if (normPage(link.getAttribute('href')) === currentNorm) {
             link.classList.add('active');
         }
     });
