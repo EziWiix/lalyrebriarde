@@ -233,6 +233,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const empty = document.getElementById('datesEmpty');
         if (empty) empty.style.display = totalVisible === 0 ? 'block' : 'none';
+
+        // Banderole hero : prochaine date à venir (toutes formations confondues)
+        const heroNext = document.getElementById('heroNext');
+        if (heroNext) {
+            const upcoming = [...datesContainer.querySelectorAll('.date-item[data-date]')]
+                .map((it) => ({ it: it, d: new Date(it.dataset.date + 'T00:00:00') }))
+                .filter((x) => !isNaN(x.d.getTime()) && x.d >= today)
+                .sort((a, b) => a.d - b.d);
+            if (upcoming.length) {
+                const moisCourt = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+                const next = upcoming[0].it, d = upcoming[0].d;
+                const h4 = next.querySelector('h4'), p = next.querySelector('p');
+                const titre = h4 ? h4.textContent.trim() : '';
+                const lieu = p ? p.textContent.trim() : '';
+                let txt = 'Prochaine sortie : ' + d.getDate() + ' ' + moisCourt[d.getMonth()] + ' ' + d.getFullYear() + ' — ' + titre;
+                if (lieu) txt += ' · ' + lieu;
+                document.getElementById('heroNextText').textContent = txt;
+                heroNext.style.display = 'inline-flex';
+            }
+        }
     }
 
     // --- Galerie : visionneuse (lightbox) ---
