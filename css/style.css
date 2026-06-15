@@ -121,17 +121,18 @@ img {
 .main-nav {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
 }
 
 .nav-link {
     color: var(--white);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 8px 16px;
+    letter-spacing: 0.5px;
+    padding: 8px 9px;
     position: relative;
+    white-space: nowrap;
     transition: color var(--transition);
 }
 
@@ -1849,7 +1850,7 @@ img {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1140px) {
     :root {
         --header-height: 70px;
     }
@@ -1882,12 +1883,16 @@ img {
         padding: 16px 0;
         border-bottom: 1px solid rgba(255,255,255,0.08);
         width: 100%;
+        white-space: normal;
+        letter-spacing: 1.5px;
     }
 
     .nav-link::after {
         display: none;
     }
+}
 
+@media (max-width: 768px) {
     .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
