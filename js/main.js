@@ -261,6 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Galerie : visionneuse (lightbox) ---
     const galleryGrid = document.getElementById('galleryGrid');
     const lightbox = document.getElementById('lightbox');
+
+    // Actualités : masquer le message "aucune affiche" s'il y a des affiches
+    const affichesEmpty = document.getElementById('affichesEmpty');
+    if (affichesEmpty && galleryGrid && galleryGrid.querySelector('img')) {
+        affichesEmpty.style.display = 'none';
+    }
+
     if (galleryGrid && lightbox) {
         const imgs = [...galleryGrid.querySelectorAll('img')];
         const lbImg = document.getElementById('lbImg');
